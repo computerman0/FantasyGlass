@@ -16,16 +16,16 @@ struct SetupAssistantView: View {
                 }
                 Section("1 · Connect a fantasy league") {
                     Text("ESPN is required for league import. Public leagues need a league ID and season. Private leagues also need your existing ESPN session cookies. No ESPN password is collected.")
-                    NavigationLink("Connect ESPN league",systemImage:"trophy") { LeagueConnectForm(model:model,onConnected: { dismiss() }) }
+                    NavigationLink { LeagueConnectForm(model:model,onConnected: { dismiss() }) } label: { Label("Connect ESPN league",systemImage:"trophy") }
                     Link("Open ESPN Fantasy Football",destination:URL(string:"https://www.espn.com/fantasy/football/")!)
                 }
                 Section("2 · Choose live statistics") {
                     Text("ESPN's unofficial fantasy data is the default, with no API subscription. Availability and latency are not guaranteed. SportsDataIO is optional and requires a suitable NFL data plan; a free trial may contain scrambled statistics.")
-                    NavigationLink("Sports data setup",systemImage:"waveform.path.ecg") { SportsSetupView(model:model) }
+                    NavigationLink { SportsSetupView(model:model) } label: { Label("Sports data setup",systemImage:"waveform.path.ecg") }
                 }
                 Section("3 · Choose background updates") {
                     Text("Local Live Activities work without a server while the app can run. For updates and alerts while suspended, configure the optional APNs backend and a paid Apple Developer provisioning profile. iOS controls delivery and activity lifetime.")
-                    NavigationLink("APNs and backend setup",systemImage:"antenna.radiowaves.left.and.right") { BackendSetupView(model:model) }
+                    NavigationLink { BackendSetupView(model:model) } label: { Label("APNs and backend setup",systemImage:"antenna.radiowaves.left.and.right") }
                 }
                 Section("Your credentials") {
                     Label("Stored in the iOS Keychain",systemImage:"key.fill")
@@ -65,7 +65,7 @@ struct LeagueConnectForm: View {
                 TextField("Season",text:$season).keyboardType(.numberPad)
                 Picker("Account",selection:$account) { ForEach(model.preferences.accountAliases,id:\.self) { Text($0).tag($0) } }
                 Text("Find leagueId in the URL when viewing your league on ESPN. A league ID is not a password.").font(.caption).foregroundStyle(.secondary)
-                NavigationLink("Private league credentials",systemImage:"key") { ESPNAccountView(model:model,initialAlias:account) }
+                NavigationLink { ESPNAccountView(model:model,initialAlias:account) } label: { Label("Private league credentials",systemImage:"key") }
                 Link("Open ESPN Fantasy Football",destination:URL(string:"https://www.espn.com/fantasy/football/")!)
             }
             Section {

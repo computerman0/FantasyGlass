@@ -11,9 +11,9 @@ struct SettingsView: View {
                 Section("Connections") {
                     Button("Open setup assistant",systemImage:"wand.and.stars") { setup = true }
                     ForEach(model.preferences.accountAliases,id:\.self) { account in NavigationLink("ESPN · \(account)") { ESPNAccountView(model:model,initialAlias:account) } }
-                    NavigationLink("Add ESPN account",systemImage:"person.badge.plus") { ESPNAccountView(model:model,initialAlias:"") }
-                    NavigationLink("Sports data providers",systemImage:"waveform.path.ecg") { SportsSetupView(model:model) }
-                    NavigationLink("APNs and backend",systemImage:"antenna.radiowaves.left.and.right") { BackendSetupView(model:model) }
+                    NavigationLink { ESPNAccountView(model:model,initialAlias:"") } label: { Label("Add ESPN account",systemImage:"person.badge.plus") }
+                    NavigationLink { SportsSetupView(model:model) } label: { Label("Sports data providers",systemImage:"waveform.path.ecg") }
+                    NavigationLink { BackendSetupView(model:model) } label: { Label("APNs and backend",systemImage:"antenna.radiowaves.left.and.right") }
                 }
                 Section("Live Activities") {
                     Toggle("Enable Live Activities",isOn:$model.preferences.liveActivitiesEnabled)
