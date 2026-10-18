@@ -2,6 +2,7 @@
 """Check that normal and container-mode cold launches stay alive on a simulator."""
 import os
 from pathlib import Path
+import plistlib
 import re
 import subprocess
 import sys
@@ -11,7 +12,8 @@ match = re.search(r'(?:^|,)id=([^,]+)', destination)
 if not match:
     raise SystemExit('Launch checks require an explicit simulator id in the destination.')
 device = match[1]
-bundle = 'com.example.FantasyGlass'
+with (Path(app_path) / 'Info.plist').open('rb') as info:
+    bundle = plistlib.load(info)['CFBundleIdentifier']
 output = Path(__file__).resolve().parent.parent / 'build' / 'launch-checks'
 output.mkdir(parents=True, exist_ok=True)
 
@@ -37,6 +39,8 @@ for mode in ['native', 'container']:
                 simctl('io', device, 'screenshot', str(output / f'{mode}.png'))
                 print(f'{mode}: app remained running for 12 seconds; screenshot captured.', flush=True)
             else:
+                log.flush()
+                print((output / f'{mode}.log').read_text(), file=sys.stderr, flush=True)
                 raise RuntimeError(f'{mode}: app exited during launch (code {code}); inspect {mode}.log')
         finally:
             subprocess.run(['xcrun', 'simctl', 'terminate', device, bundle], check=False)

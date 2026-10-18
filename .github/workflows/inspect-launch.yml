@@ -1,0 +1,29 @@
+name: Inspect simulator launch diagnostics
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Verify run containing simulator diagnostics
+        required: true
+        default: '39152794747'
+permissions:
+  actions: read
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: FantasyGlass-simulator-diagnostics
+          path: diagnostics
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Print app launch logs
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          for path in Path('diagnostics').rglob('*.log'):
+              print(path)
+              print(path.read_text())
+          PY
