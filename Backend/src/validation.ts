@@ -55,10 +55,9 @@ export function validateSubscription(value: unknown, pathID: string): Subscripti
     if (!Array.isArray(v.rules) || !v.rules.length || v.rules.length > 256) throw new InputError("Supply 1–256 local rules");
     rules = v.rules.map(rule);
   }
-  if (v.activityStartedAt != null && (!Number.isFinite(v.activityStartedAt) || Number(v.activityStartedAt) > Date.now()/1000+60)) throw new InputError("Invalid activity start time");
   return {id,connectionID:string(v.connectionID,"connection ID")!,leagueID,season:Number(v.season),teamID:Number(v.teamID),
-    matchupID:string(v.matchupID,"matchup ID",40,false),activityToken:token(v.activityToken,"activity token"),deviceToken:token(v.deviceToken,"device token"),
-    activityStartedAt:v.activityStartedAt == null ? undefined : Number(v.activityStartedAt),s2,swid,rules,
+    matchupID:string(v.matchupID,"matchup ID",40,false),deviceToken:token(v.deviceToken,"device token"),
+    s2,swid,rules,
     ruleIssues:v.ruleIssues.map(x=>string(x,"rule issue",512)!),enabledAlerts:[...new Set(v.enabledAlerts)],
     thresholds:stringMap(v.thresholds,"thresholds",true),sportsDataKey:string(v.sportsDataKey,"SportsDataIO key",256,false),
     playerMappings:stringMap(v.playerMappings,"player mappings",false),accurateFeedConfirmed:v.accurateFeedConfirmed === true};

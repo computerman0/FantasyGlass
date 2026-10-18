@@ -9,21 +9,13 @@ import SwiftData
     init() {
         do {
             let container = try ModelContainer(for:CachedLeague.self,CachedObject.self)
-            _model = State(initialValue:AppModel(container:container))
+            let appModel = AppModel(container:container)
+            _model = State(initialValue:appModel)
+            BackgroundRefreshService.shared.model = appModel
             startupError = nil
         } catch { startupError = error.localizedDescription }
     }
     var body: some Scene {
-        if RuntimeEnvironment.isLiveContainer {
-            mainWindow
-        } else {
-            mainWindow.backgroundTask(.appRefresh(AppModel.refreshIdentifier)) {
-                let current = await MainActor.run { model }
-                if let current { _ = await current.refresh() }
-            }
-        }
-    }
-    private var mainWindow: some Scene {
         WindowGroup {
             if let model {
                 RootView(model:model)

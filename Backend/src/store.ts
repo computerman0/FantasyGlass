@@ -5,7 +5,7 @@ import {dirname} from "node:path";
 import type {Subscription, Frame} from "./types.js";
 import {canonicalJSON} from "./canonical.js";
 
-export interface QueuedPush { id: string; subscriptionID: string; token: string; kind: "alert" | "liveactivity"; payload: unknown; attempts: number; created: number; }
+export interface QueuedPush { id: string; subscriptionID: string; token: string; kind: "alert"; payload: unknown; attempts: number; created: number; }
 export interface StoredSubscription { subscription: Subscription; frame?: Frame; nextPoll: number; lastError?: string; }
 
 export class EncryptedStore {
@@ -45,12 +45,8 @@ export class EncryptedStore {
       ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,updated=excluded.updated,
         frame=CASE WHEN subscriptions.configHash=excluded.configHash THEN subscriptions.frame ELSE NULL END,
         nextPoll=CASE WHEN subscriptions.configHash=excluded.configHash THEN subscriptions.nextPoll ELSE 0 END,configHash=excluded.configHash`).run(sub.id,this.encrypt(sub),hash,Date.now());
-    if (old?.subscription.activityToken !== sub.activityToken) {
-      this.db.prepare("DELETE FROM outbox WHERE id=?").run(`live:${sub.id}`);
-      this.db.prepare("UPDATE subscriptions SET nextPoll=0 WHERE id=?").run(sub.id);
-    }
     if (old?.subscription.deviceToken !== sub.deviceToken || !sub.enabledAlerts.length) {
-      const queued = this.db.prepare("SELECT id FROM outbox WHERE subscriptionID=? AND id!=?").all(sub.id,`live:${sub.id}`);
+      const queued = this.db.prepare("SELECT id FROM outbox WHERE subscriptionID=?").all(sub.id);
       for (const row of queued) this.db.prepare("DELETE FROM outbox WHERE id=?").run(String(row.id));
     }
   }
@@ -90,7 +86,6 @@ export class EncryptedStore {
   invalidateToken(id: string, token: string, kind: QueuedPush["kind"]): void {
     const stored = this.get(id); if (!stored) return;
     const sub = stored.subscription;
-    if (kind === "liveactivity" && sub.activityToken === token) { delete sub.activityToken; delete sub.activityStartedAt; }
     if (kind === "alert" && sub.deviceToken === token) delete sub.deviceToken;
     this.db.prepare("UPDATE subscriptions SET payload=? WHERE id=?").run(this.encrypt(sub),id);
   }

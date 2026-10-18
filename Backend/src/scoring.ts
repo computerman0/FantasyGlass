@@ -1,5 +1,5 @@
 import {d} from "./decimal.js";
-import type {Rule, League, Team, Game, Player, ContentState, Frame, Subscription} from "./types.js";
+import type {Rule, League, Team, Game, Player, MatchupSummary, Frame, Subscription} from "./types.js";
 
 export function score(stats: Record<string,string>, position: string, rules: Rule[]): string {
   let total = d(0);
@@ -44,7 +44,7 @@ export function teamScore(team: Team, league: League, rules: Rule[], games: Game
     remaining:starters.filter(p=>{ const g = gameFor(p,games); return g && remaining(g); }).length,
     total:starters.length };
 }
-export function observation(sub: Subscription, league: League, games: Game[], now: number): {content:ContentState; frame:Frame} {
+export function observation(sub: Subscription, league: League, games: Game[], now: number): {content:MatchupSummary; frame:Frame} {
   const own = league.teams.find(t=>t.id === sub.teamID);
   const opponentID = league.matchup?.homeID === sub.teamID ? league.matchup.awayID : league.matchup?.homeID;
   const opponent = league.teams.find(t=>t.id === opponentID);
@@ -57,7 +57,7 @@ export function observation(sub: Subscription, league: League, games: Game[], no
   const liveGame = games.find(g=>active(g) && (teams.has(g.home) || teams.has(g.away)));
   const total = mine.total+theirs.total;
   const outstanding = mine.playing+mine.remaining+theirs.playing+theirs.remaining;
-  const content: ContentState = {myScore:ownScore ?? "—",opponentScore:opponentScore ?? "—",myProjection:mine.projected,opponentProjection:theirs.projected,
+  const content: MatchupSummary = {myScore:ownScore ?? "—",opponentScore:opponentScore ?? "—",myProjection:mine.projected,opponentProjection:theirs.projected,
     myRemaining:mine.remaining,opponentRemaining:theirs.remaining,myPlaying:mine.playing,opponentPlaying:theirs.playing,
     progress:total ? Math.min(1,Math.max(0,(total-outstanding)/total)) : 0, leader,
     status:liveGame ? `${liveGame.away} @ ${liveGame.home} · ${liveGame.detail}`.slice(0,140) : `${mine.playing} playing · ${mine.remaining} upcoming`,

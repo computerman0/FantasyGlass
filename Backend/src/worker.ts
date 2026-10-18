@@ -1,10 +1,10 @@
 import {createHash} from "node:crypto";
 import {ProviderClient,ProviderFailure} from "./providers.js";
 import {EncryptedStore, type QueuedPush} from "./store.js";
-import {APNsClient,livePayload} from "./apns.js";
-import {observation,active,remaining} from "./scoring.js";
+import {APNsClient} from "./apns.js";
+import {observation,active} from "./scoring.js";
 import {detectEvents} from "./events.js";
-import type {ContentState, Game} from "./types.js";
+import type {Game} from "./types.js";
 import {canonicalJSON} from "./canonical.js";
 
 export function pollInterval(games: Game[], now: number): number {
@@ -32,19 +32,11 @@ export class Worker {
           const latest = this.store.get(sub.id);
           if (!latest || canonicalJSON(latest.subscription) !== canonicalJSON(sub)) continue;
           const now = Date.now()/1000;
-          const {content,frame} = observation(sub,league,games,now);
+          const {frame} = observation(sub,league,games,now);
           const pushes: Omit<QueuedPush,"attempts"|"created">[] = [];
           if (sub.deviceToken) for (const event of detectEvents(stored.frame,frame,sub)) {
             const link = new URL("fantasyglass://matchup"); link.searchParams.set("connection",sub.connectionID); link.searchParams.set("matchup",league.matchup?.id ?? "");
             pushes.push({id:event.id,subscriptionID:sub.id,token:sub.deviceToken,kind:"alert",payload:{aps:{alert:{title:event.title,body:event.body},sound:"default","thread-id":createHash("sha256").update(sub.connectionID).digest("hex")},url:link.toString()}});
-          }
-          if (sub.activityToken) {
-            const changedMatchup = sub.matchupID !== league.matchup?.id;
-            const expired = sub.activityStartedAt == null || now-sub.activityStartedAt >= 7.9*3600;
-            const finished = games.length > 0 && games.every(g=>g.phase === "final" || g.phase === "canceled");
-            const ending = changedMatchup || expired || finished;
-            const state: ContentState = changedMatchup ? {...content,myScore:stored.frame?.ownScore ?? "—",opponentScore:stored.frame?.opponentScore ?? "—",myProjection:undefined,opponentProjection:undefined,myRemaining:0,opponentRemaining:0,myPlaying:0,opponentPlaying:0,progress:1,status:"Matchup changed. Reopen FantasyGlass to track the new matchup."} : content;
-            pushes.push({id:`live:${sub.id}`,subscriptionID:sub.id,token:sub.activityToken,kind:"liveactivity",payload:livePayload(state,now,ending)});
           }
           this.store.commit(sub.id,frame,pollInterval(games,now),pushes,warning);
         } catch (error) {
@@ -61,14 +53,13 @@ export class Worker {
     if (!this.apns) return;
     for (const push of this.store.pending()) {
       const sub = this.store.get(push.subscriptionID)?.subscription;
-      const currentToken = push.kind === "alert" ? sub?.deviceToken : sub?.activityToken;
-      if (!sub || currentToken !== push.token || (push.kind === "alert" && !sub.enabledAlerts.length)) { this.store.delivered(push.id); continue; }
-      if (Date.now()-push.created > (push.kind === "liveactivity" ? 180000 : 3600000)) { this.store.delivered(push.id); continue; }
+      const currentToken = sub?.deviceToken;
+      if (push.kind !== "alert" || !sub || currentToken !== push.token || !sub.enabledAlerts.length) { this.store.delivered(push.id); continue; }
+      if (Date.now()-push.created > 3600000) { this.store.delivered(push.id); continue; }
       try {
         const result = await this.apns.send(push.token,push.kind,push.payload,push.id);
         if (result.status === 200) {
           this.store.delivered(push.id);
-          if (push.kind === "liveactivity" && (push.payload as {aps?:{event?:string}}).aps?.event === "end") this.store.invalidateToken(push.subscriptionID,push.token,push.kind);
         } else if (result.status === 410 || ["BadDeviceToken","DeviceTokenNotForTopic","Unregistered"].includes(result.reason ?? "")) {
           this.store.invalidateToken(push.subscriptionID,push.token,push.kind); this.store.delivered(push.id);
           this.store.fail(push.subscriptionID,`APNs token rejected: ${result.reason ?? result.status}. Re-register with matching provisioning.`,60);

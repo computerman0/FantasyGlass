@@ -13,7 +13,7 @@ import {requestHandler} from "../src/http.js";
 import {validateSubscription} from "../src/validation.js";
 import {detectEvents} from "../src/events.js";
 import {Worker,pollInterval} from "../src/worker.js";
-import {APNsClient,livePayload} from "../src/apns.js";
+import {APNsClient} from "../src/apns.js";
 import type {Subscription,Rule,Frame,Game} from "../src/types.js";
 import {canonicalJSON} from "../src/canonical.js";
 
@@ -45,15 +45,13 @@ test("bonuses, penalties, corrections and position overrides",()=>{
   assert.equal(score({"95":"2"},"0",defense),"0");
   assert.equal(score({"24":"99","72":"2"},"2",[linear("24","0.1"),linear("72","-2")]),"5.9");
 });
-test("real-shaped league import and live content contract",()=>{
+test("real-shaped league import and exact matchup summary",()=>{
   const parsed = league(); assert.equal(parsed.teams.length,2); assert.equal(parsed.week,7);
   const result = observation(sub(),parsed,[],1760000000);
   assert.equal(result.content.myScore,"27.5"); assert.equal(result.content.opponentScore,"16");
   assert.equal(result.content.leader,1); assert.equal(result.content.updatedAt,1760000000);
   assert.equal(result.frame.players["3918298"]?.touchdowns,"3");
-  const payload = livePayload(result.content,1760000000) as {aps:Record<string,unknown>};
-  assert.equal(payload.aps.event,"update"); assert.equal(payload.aps["stale-date"],1760000180);
-  assert(Buffer.byteLength(JSON.stringify(payload)) < 3500);
+
 });
 test("missing data and multi-week rosters cannot assert local aggregates",()=>{
   const parsed = league(); delete parsed.teams[0]!.players[0]!.stats;
@@ -112,10 +110,10 @@ test("encrypted persistence, deduplication, retry and deletion",()=>{
   } finally { rmSync(directory,{recursive:true,force:true}); }
 });
 test("configuration changes reset event baselines and token rotation removes obsolete pushes",()=>{
-  const store = new EncryptedStore(":memory:",randomBytes(32)), original = {...sub(),activityToken:"a".repeat(64)};
+  const store = new EncryptedStore(":memory:",randomBytes(32)), original = {...sub(),deviceToken:"a".repeat(64)};
   store.upsert(original); const frame = observation(sub(),league(),[],0).frame;
-  store.commit(original.id,frame,900,[{id:`live:${original.id}`,subscriptionID:original.id,token:original.activityToken,kind:"liveactivity",payload:{}}]);
-  store.upsert({...original,activityToken:"b".repeat(64)}); assert.equal(store.pending().length,0); assert(store.get(original.id)?.frame);
+  store.commit(original.id,frame,900,[{id:`alert:${original.id}`,subscriptionID:original.id,token:original.deviceToken,kind:"alert",payload:{}}]);
+  store.upsert({...original,deviceToken:"b".repeat(64)}); assert.equal(store.pending().length,0); assert(store.get(original.id)?.frame);
   store.upsert({...original,rules:[linear("3","1")]}); assert.equal(store.get(original.id)?.frame,undefined); store.close();
 });
 test("map key ordering does not reset persisted notification baselines",()=>{
@@ -134,7 +132,7 @@ test("APNs JWT signature uses ES256 and cached tokens",()=>{
 });
 test("validation rejects header injection, invalid rules and arbitrary destinations",()=>{
   assert.deepEqual(JSON.parse(JSON.stringify(validateSubscription(sub(),sub().id))),sub());
-  for (const value of [{...sub(),s2:"x\nheader",swid:"x"},{...sub(),leagueID:"../evil"},{...sub(),rules:[{...linear("3","1"),mode:"perWhole",lower:"0"}]},{...sub(),activityToken:"not-a-token"}]) assert.throws(()=>validateSubscription(value,sub().id));
+  for (const value of [{...sub(),s2:"x\nheader",swid:"x"},{...sub(),leagueID:"../evil"},{...sub(),rules:[{...linear("3","1"),mode:"perWhole",lower:"0"}]},{...sub(),deviceToken:"not-a-token"}]) assert.throws(()=>validateSubscription(value,sub().id));
 });
 test("authenticated HTTP import, status and deletion never echo secrets",async()=>{
   const store = new EncryptedStore(":memory:",randomBytes(32)), owner = randomBytes(32).toString("hex");

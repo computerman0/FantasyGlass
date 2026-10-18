@@ -7,7 +7,7 @@ export const alertKinds = ["touchdown","leadChange","closeFinalGame","injuredOut
 export type AlertKind = typeof alertKinds[number];
 export interface Subscription {
   id: string; connectionID: string; leagueID: string; season: number; teamID: number;
-  matchupID?: string; activityToken?: string; activityStartedAt?: number; deviceToken?: string;
+  matchupID?: string; deviceToken?: string;
   s2?: string; swid?: string; rules?: Rule[]; ruleIssues: string[];
   enabledAlerts: AlertKind[]; thresholds: Record<string,string>;
   sportsDataKey?: string; playerMappings: Record<string,string>; accurateFeedConfirmed: boolean;
@@ -18,7 +18,7 @@ export interface Player { id: string; name: string; team: string; position: stri
 export interface Team { id: number; name: string; players: Player[]; }
 export interface Matchup { id: string; homeID: number; awayID?: number; homeOfficial?: string; awayOfficial?: string; homeAdjustment: string; awayAdjustment: string; weeks: number[]; }
 export interface League { id: string; name: string; week: number; teams: Team[]; rules: Rule[]; issues: string[]; matchup?: Matchup; }
-export interface ContentState {
+export interface MatchupSummary {
   myScore: string; opponentScore: string; myProjection?: string; opponentProjection?: string;
   myRemaining: number; opponentRemaining: number; myPlaying: number; opponentPlaying: number;
   progress: number; leader: number; status: string; updatedAt: number; scoreSource: string;

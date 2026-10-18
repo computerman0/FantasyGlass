@@ -29,6 +29,7 @@ import FantasyCore
 
 @MainActor final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        BackgroundRefreshService.shared.register()
         if !RuntimeEnvironment.isLiveContainer { UNUserNotificationCenter.current().delegate = self }
         return true
     }
