@@ -97,11 +97,27 @@ import FantasyCore
         let status = active.first.map { game in
             RefreshPolicy.stale(fetchedAt:game.fetchedAt,active:true) ? "NFL game status delayed" : "\(game.away) @ \(game.home) · \(game.detail)"
         } ?? "\(mine?.playing ?? 0) playing · \(mine?.remaining ?? 0) upcoming"
-        return .init(myScore:myScore?.exact ?? "—",opponentScore:theirScore?.exact ?? "—",myProjection:mine?.projected?.exact,opponentProjection:opponent?.projected?.exact,
-            myRemaining:mine?.remaining ?? 0,opponentRemaining:opponent?.remaining ?? 0,myPlaying:mine?.playing ?? 0,opponentPlaying:opponent?.playing ?? 0,
-            progress:count == 0 ? 0 : min(1,max(0,Double(count-outstanding)/Double(count))),
-            leader:myScore == nil || theirScore == nil || myScore == theirScore ? 0 : myScore! > theirScore! ? 1 : -1,
-            status:String(status.prefix(140)),updatedAt:league.snapshot.fetchedAt.timeIntervalSince1970,
-            scoreSource:mine?.local != nil && opponent?.local != nil ? "Local scoring" : "ESPN / partial local")
+        let progress: Double = count == 0 ? 0 : min(1,max(0,Double(count-outstanding)/Double(count)))
+        let leader: Int
+        if let myScore, let theirScore, myScore != theirScore {
+            leader = myScore > theirScore ? 1 : -1
+        } else {
+            leader = 0
+        }
+        let scoreSource = mine?.local != nil && opponent?.local != nil ? "Local scoring" : "ESPN / partial local"
+        return MatchupActivityAttributes.ContentState(
+            myScore:myScore?.exact ?? "—",
+            opponentScore:theirScore?.exact ?? "—",
+            myProjection:mine?.projected?.exact,
+            opponentProjection:opponent?.projected?.exact,
+            myRemaining:mine?.remaining ?? 0,
+            opponentRemaining:opponent?.remaining ?? 0,
+            myPlaying:mine?.playing ?? 0,
+            opponentPlaying:opponent?.playing ?? 0,
+            progress:progress,
+            leader:leader,
+            status:String(status.prefix(140)),
+            updatedAt:league.snapshot.fetchedAt.timeIntervalSince1970,
+            scoreSource:scoreSource)
     }
 }
