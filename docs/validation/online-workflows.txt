@@ -1,0 +1,4 @@
+Codemagic configuration passed the provider-hosted JSON schema retrieved 2026-10-18.
+GitHub workflow parsed; manual dispatch, read-only repository permission and macOS runner verified.
+9 embedded shell scripts and 2 embedded Python scripts passed syntax checks.
+Hosted Xcode execution, signing, profile matching, IPA export and TestFlight upload were NOT run.

@@ -1,0 +1,12 @@
+[
+  {
+    "url": "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2025/segments/0/leagues/48153503?view=mSettings&view=mTeam&view=mRoster&view=mMatchup&view=mMatchupScore",
+    "error": "HTTP Error 404: Not Found",
+    "season": 2025
+  },
+  {
+    "url": "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2026/segments/0/leagues/48153503?view=mSettings&view=mTeam&view=mRoster&view=mMatchup&view=mMatchupScore",
+    "error": "HTTP Error 404: Not Found",
+    "season": 2026
+  }
+]

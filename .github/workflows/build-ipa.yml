@@ -1,0 +1,55 @@
+name: Build iPhone IPA online
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unsigned-ipa:
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select installed stable Xcode 26 or newer
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, subprocess
+          choices = []
+          for path in pathlib.Path('/Applications').glob('Xcode*.app'):
+              if any(word in path.name.lower() for word in ['beta', 'preview', 'rc']):
+                  continue
+              result = subprocess.check_output([str(path/'Contents/Developer/usr/bin/xcodebuild'), '-version'], text=True)
+              match = re.search(r'Xcode (\d+)\.(\d+)', result)
+              if match and int(match[1]) >= 26:
+                  choices.append(((int(match[1]), int(match[2])), str(path)))
+          if not choices:
+              raise SystemExit('No stable Xcode 26+ on this runner; update the macOS runner image.')
+          selected = max(choices)[1] + '/Contents/Developer'
+          subprocess.run(['sudo', 'xcode-select', '-s', selected], check=True)
+          PY
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+      - name: Test the portable scoring and provider core
+        run: swift test --package-path Core
+      - name: Archive app and widget without signing
+        run: |
+          set -o pipefail
+          mkdir -p build
+          bash Scripts/build-ipa.sh unsigned 2>&1 | tee build/online-build.log
+      - name: Downloadable IPA for compatible re-signing
+        uses: actions/upload-artifact@v4
+        with:
+          name: FantasyGlass-unsigned-IPA
+          path: build/unsigned/FantasyGlass-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 7
+      - name: Preserve the build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: FantasyGlass-build-log
+          path: build/online-build.log
+          if-no-files-found: ignore
+          retention-days: 7

@@ -1,0 +1,1089 @@
+// !$*UTF8*$!
+{
+	"archiveVersion" = 1;
+	"classes" = {
+	};
+	"objectVersion" = 56;
+	"objects" = {
+		022CB20525099AE243733199 = {
+			"isa" = "PBXGroup";
+			"children" = (
+				A33957989B825B18FCB2DF1B,
+			);
+			"name" = "AppTests";
+			"sourceTree" = "<group>";
+		};
+		02404F78CCE5FFBF04939DFD = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/AppModel.swift";
+			"sourceTree" = "<group>";
+		};
+		0872FBF24890667DBC421F2C = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG ";
+				"APS_ENVIRONMENT" = "development";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID).widgets";
+				"INFOPLIST_FILE" = "Config/Widget-Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/Widget.entitlements";
+				"APPLICATION_EXTENSION_API_ONLY" = "YES";
+				"SKIP_INSTALL" = "YES";
+			};
+			"name" = "Debug";
+		};
+		0B09812C2027925C21B5E5EE = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"CLANG_WARN_DOCUMENTATION_COMMENTS" = "YES";
+				"GCC_WARN_UNUSED_VARIABLE" = "YES";
+			};
+			"name" = "PushRelease";
+		};
+		0BAC759074A15DE8F4D7A53C = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		0D43B5B48A5FC07E7FC7E0FE = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/Components.swift";
+			"sourceTree" = "<group>";
+		};
+		0D6E4079E36703EBD37C0072 = {
+			"isa" = "PBXGroup";
+			"children" = (
+				13C4608B5138EBE9B3A45A55,
+				B8A7C4C7C43B9A2F11EEEA63,
+				D81C48B30DD553C55C9E3D68,
+				022CB20525099AE243733199,
+				1B3039B2E15DD2AB7EA6156D,
+				68DDED12D2DEBFBE9D767156,
+				42C59AF8A4BAE559BC5A5D5D,
+				4EDC8BFAFC6BD936B849F38C,
+			);
+			"sourceTree" = "<group>";
+		};
+		10311AAE2CC5C7AFE6FBE4A4 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 0D43B5B48A5FC07E7FC7E0FE;
+		};
+		112F9ED47835005BE23DADEC = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text";
+			"path" = "Config/Signing.xcconfig.example";
+			"sourceTree" = "<group>";
+		};
+		125E0383862244EC12C5DB92 = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = 244210E48437B6556980A702;
+			"proxyType" = 1;
+			"remoteGlobalIDString" = 392DC569C58DA82A3B263A70;
+			"remoteInfo" = "FantasyGlass";
+		};
+		13C4608B5138EBE9B3A45A55 = {
+			"isa" = "PBXGroup";
+			"children" = (
+				02404F78CCE5FFBF04939DFD,
+				BD1FED5E3DD976FCE0566700,
+				C28E40D82609CBB042FAEA49,
+				458E09065796ABF5C4963F49,
+				56AF18BF289C95F2A2358BF8,
+				6CC10ACB9D7738458B0F51AC,
+				8D571BE25BAF80AEEDCDE15C,
+				852B7EE42D0ECC4D682B232C,
+				0D43B5B48A5FC07E7FC7E0FE,
+				200807076781004B39AF1CA9,
+				999AE31C2F1823946AF62D4A,
+				78762D7C8E86D4B54153DDAE,
+				4ECEB05C408AE47A0721D9AF,
+				F261F1ADECF35C3F6D2A1FBD,
+				93ECE3E950079F18E4A916E6,
+				4AD441DFB1033D3B6CA64FBE,
+				190B156325615D3BEE8D253F,
+			);
+			"name" = "App";
+			"sourceTree" = "<group>";
+		};
+		14CA4F15A175777FB2150B99 = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"CLANG_WARN_DOCUMENTATION_COMMENTS" = "YES";
+				"GCC_WARN_UNUSED_VARIABLE" = "YES";
+			};
+			"name" = "Debug";
+		};
+		185F0F72F8A0F2952E96AAD5 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 852B7EE42D0ECC4D682B232C;
+		};
+		190B156325615D3BEE8D253F = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.xml";
+			"path" = "App/PrivacyInfo.xcprivacy";
+			"sourceTree" = "<group>";
+		};
+		1AC4B4305A16603F70A5C594 = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"CLANG_WARN_DOCUMENTATION_COMMENTS" = "YES";
+				"GCC_WARN_UNUSED_VARIABLE" = "YES";
+			};
+			"name" = "PushDebug";
+		};
+		1B3039B2E15DD2AB7EA6156D = {
+			"isa" = "PBXGroup";
+			"children" = (
+				7C0858417E8594228ED3CE0A,
+				8E0205CD89BF271E3726B26F,
+				5E3C49242C34B5C59A6046C7,
+				33CFD1FBC454ADB56BE82A69,
+				40A6257402BA9A02AA6CA276,
+				7C310C46CC2C3AB037620E6C,
+				112F9ED47835005BE23DADEC,
+				471BB4483074DFC3395FB45A,
+				7DDFA112A427BE4855A50400,
+			);
+			"name" = "Config";
+			"sourceTree" = "<group>";
+		};
+		1E86CEC13645AEED5009ED4E = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"includeInIndex" = 0;
+			"path" = "FantasyGlassTests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		1EB7515AA3A07025643F9C49 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 999AE31C2F1823946AF62D4A;
+		};
+		1FF88C58D46834F3546ED890 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 4AD441DFB1033D3B6CA64FBE;
+		};
+		200807076781004B39AF1CA9 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/LeaguesView.swift";
+			"sourceTree" = "<group>";
+		};
+		244210E48437B6556980A702 = {
+			"isa" = "PBXProject";
+			"attributes" = {
+				"BuildIndependentTargetsInParallel" = "YES";
+				"LastSwiftUpdateCheck" = "2600";
+				"LastUpgradeCheck" = "2600";
+				"TargetAttributes" = {
+					392DC569C58DA82A3B263A70 = {
+						"CreatedOnToolsVersion" = "26.0";
+					};
+					A22F1B0ACCF99867105595A3 = {
+						"CreatedOnToolsVersion" = "26.0";
+					};
+					2B133732662DDFCD4885F4BA = {
+						"CreatedOnToolsVersion" = "26.0";
+						"TestTargetID" = 392DC569C58DA82A3B263A70;
+					};
+				};
+			};
+			"buildConfigurationList" = F905B102B4F13BD6617D8EB3;
+			"compatibilityVersion" = "Xcode 14.0";
+			"developmentRegion" = "en";
+			"hasScannedForEncodings" = 0;
+			"knownRegions" = (
+				"en",
+				"Base",
+			);
+			"mainGroup" = 0D6E4079E36703EBD37C0072;
+			"productRefGroup" = 4EDC8BFAFC6BD936B849F38C;
+			"projectDirPath" = "";
+			"projectRoot" = "";
+			"targets" = (
+				392DC569C58DA82A3B263A70,
+				A22F1B0ACCF99867105595A3,
+				2B133732662DDFCD4885F4BA,
+			);
+			"packageReferences" = (
+				552AFB5EC1B6A8F3B1B9D25D,
+			);
+		};
+		28BAF9B0E1DA6DD75774D26A = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.app-extension";
+			"includeInIndex" = 0;
+			"path" = "FantasyGlassWidgets.appex";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		2B133732662DDFCD4885F4BA = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = 53831008AF94CB3E08F0279F;
+			"buildPhases" = (
+				3EBD2217A79E849BC2CB0409,
+				C312A764FF8843541E9597C4,
+				8CB49F24EA7763991036BE40,
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+				CA787894D9F84EB7696DB3BB,
+			);
+			"name" = "FantasyGlassTests";
+			"productName" = "FantasyGlassTests";
+			"productReference" = 1E86CEC13645AEED5009ED4E;
+			"productType" = "com.apple.product-type.bundle.unit-test";
+			"packageProductDependencies" = (
+				538D1F9C6E135F531F405C70,
+			);
+		};
+		2D04009541A01866B7B33FEA = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 93ECE3E950079F18E4A916E6;
+		};
+		3076639932B99AEADFC66239 = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ENABLE_TESTABILITY" = "NO";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "";
+				"APS_ENVIRONMENT" = "production";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID).tests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/FantasyGlass.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FantasyGlass";
+				"SKIP_INSTALL" = "YES";
+			};
+			"name" = "Release";
+		};
+		33CFD1FBC454ADB56BE82A69 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.xml";
+			"path" = "Config/ExportOptions.development.plist";
+			"sourceTree" = "<group>";
+		};
+		38E5DADA22A1501D52A1596A = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.application";
+			"includeInIndex" = 0;
+			"path" = "FantasyGlass.app";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		392DC569C58DA82A3B263A70 = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = 900621C63942CF97857E701F;
+			"buildPhases" = (
+				4184A38117537929361980BF,
+				AC88EC11719E229ADCD3BF7D,
+				B93ECE6AD841116D6E38A4DC,
+				88A8FBADE0C2EEDC2C61B4FD,
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+				F17C26EEC78CA775EDB7F5BC,
+			);
+			"name" = "FantasyGlass";
+			"productName" = "FantasyGlass";
+			"productReference" = 38E5DADA22A1501D52A1596A;
+			"productType" = "com.apple.product-type.application";
+			"packageProductDependencies" = (
+				A6B466BAD5561615B54DA285,
+			);
+		};
+		3C5109D473E463FD45A7AFCA = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ENABLE_TESTABILITY" = "NO";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "PUSH_ENABLED";
+				"APS_ENVIRONMENT" = "production";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID).tests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/FantasyGlass.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FantasyGlass";
+				"SKIP_INSTALL" = "YES";
+			};
+			"name" = "PushRelease";
+		};
+		3EBD2217A79E849BC2CB0409 = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				DC6AAEAE7B5C92EE6790C4E3,
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		40A6257402BA9A02AA6CA276 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.entitlements";
+			"path" = "Config/Local.entitlements";
+			"sourceTree" = "<group>";
+		};
+		4184A38117537929361980BF = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				93A1350F424E9DAAFF19F962,
+				6E9D1AD9CFBDD468210B1393,
+				D4EDA45AE57CDEABCDBF4EEB,
+				4F40FD67AD5DF70FD7B184A0,
+				607CD4E4E8B9EA6B4BDF4FB6,
+				B69875D5CC346DB7F3EBAB52,
+				5534A2DA7CC9BA57FCB8EB4E,
+				185F0F72F8A0F2952E96AAD5,
+				10311AAE2CC5C7AFE6FBE4A4,
+				7157AC766425AD3D68E91EDE,
+				1EB7515AA3A07025643F9C49,
+				5D4CF156C7CB8AAD4D0CBF2E,
+				7179CBF5B114F17CD3BAA5B0,
+				9F923FF5CE90B8530A943625,
+				2D04009541A01866B7B33FEA,
+				F874AD104601F7BE359CCCC5,
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		42C59AF8A4BAE559BC5A5D5D = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text";
+			"path" = "README.md";
+			"sourceTree" = "<group>";
+		};
+		458E09065796ABF5C4963F49 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Services/KeychainStore.swift";
+			"sourceTree" = "<group>";
+		};
+		471BB4483074DFC3395FB45A = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.xml";
+			"path" = "Config/Widget-Info.plist";
+			"sourceTree" = "<group>";
+		};
+		47697D65E323E93433CB0034 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Widget/FantasyGlassWidget.swift";
+			"sourceTree" = "<group>";
+		};
+		487EE5947C2FD73C6699FE1E = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG PUSH_ENABLED";
+				"APS_ENVIRONMENT" = "development";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID).widgets";
+				"INFOPLIST_FILE" = "Config/Widget-Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/Widget.entitlements";
+				"APPLICATION_EXTENSION_API_ONLY" = "YES";
+				"SKIP_INSTALL" = "YES";
+			};
+			"name" = "PushDebug";
+		};
+		4A2428D3382CC4BB51979240 = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG PUSH_ENABLED";
+				"APS_ENVIRONMENT" = "development";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID)";
+				"INFOPLIST_FILE" = "Config/App-Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/Push.entitlements";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
+				"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME" = "AccentColor";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD" = "NO";
+			};
+			"name" = "PushDebug";
+		};
+		4AD441DFB1033D3B6CA64FBE = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "folder.assetcatalog";
+			"path" = "App/Assets.xcassets";
+			"sourceTree" = "<group>";
+		};
+		4E089F6B0C4E511BBF70682A = {
+			"isa" = "PBXBuildFile";
+			"productRef" = A6B466BAD5561615B54DA285;
+		};
+		4ECEB05C408AE47A0721D9AF = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/RootView.swift";
+			"sourceTree" = "<group>";
+		};
+		4EDC8BFAFC6BD936B849F38C = {
+			"isa" = "PBXGroup";
+			"children" = (
+				38E5DADA22A1501D52A1596A,
+				28BAF9B0E1DA6DD75774D26A,
+				1E86CEC13645AEED5009ED4E,
+			);
+			"name" = "Products";
+			"sourceTree" = "<group>";
+		};
+		4F40FD67AD5DF70FD7B184A0 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 458E09065796ABF5C4963F49;
+		};
+		52AC68E68ACED06D96BBB94B = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = BF4DEB4AF35F25EEFB485894;
+		};
+		53831008AF94CB3E08F0279F = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				E234F81BD9C197EECF10054C,
+				3076639932B99AEADFC66239,
+				B9112ECF04EC08E3DF6E43D9,
+				3C5109D473E463FD45A7AFCA,
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		538D1F9C6E135F531F405C70 = {
+			"isa" = "XCSwiftPackageProductDependency";
+			"package" = 552AFB5EC1B6A8F3B1B9D25D;
+			"productName" = "FantasyCore";
+		};
+		552AFB5EC1B6A8F3B1B9D25D = {
+			"isa" = "XCLocalSwiftPackageReference";
+			"relativePath" = "Core";
+		};
+		5534A2DA7CC9BA57FCB8EB4E = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 8D571BE25BAF80AEEDCDE15C;
+		};
+		56AF18BF289C95F2A2358BF8 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Services/LiveActivityService.swift";
+			"sourceTree" = "<group>";
+		};
+		5A623D5578E62B7C155B7B51 = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				0872FBF24890667DBC421F2C,
+				6927A519DD6603816CDA536B,
+				487EE5947C2FD73C6699FE1E,
+				BE641C0C597F1CE1C749398C,
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		5AF0776BB07B1367A99FE456 = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG ";
+				"APS_ENVIRONMENT" = "development";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID)";
+				"INFOPLIST_FILE" = "Config/App-Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/Local.entitlements";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
+				"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME" = "AccentColor";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD" = "NO";
+			};
+			"name" = "Debug";
+		};
+		5D4CF156C7CB8AAD4D0CBF2E = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 78762D7C8E86D4B54153DDAE;
+		};
+		5E3C49242C34B5C59A6046C7 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.xml";
+			"path" = "Config/ExportOptions.adhoc.plist";
+			"sourceTree" = "<group>";
+		};
+		607CD4E4E8B9EA6B4BDF4FB6 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 56AF18BF289C95F2A2358BF8;
+		};
+		65E69DABB9113C3442C35598 = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		68DDED12D2DEBFBE9D767156 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "folder";
+			"path" = "Core";
+			"sourceTree" = "<group>";
+		};
+		6927A519DD6603816CDA536B = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ENABLE_TESTABILITY" = "NO";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "";
+				"APS_ENVIRONMENT" = "production";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID).widgets";
+				"INFOPLIST_FILE" = "Config/Widget-Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/Widget.entitlements";
+				"APPLICATION_EXTENSION_API_ONLY" = "YES";
+				"SKIP_INSTALL" = "YES";
+			};
+			"name" = "Release";
+		};
+		6CC10ACB9D7738458B0F51AC = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Services/NotificationService.swift";
+			"sourceTree" = "<group>";
+		};
+		6E9D1AD9CFBDD468210B1393 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = BD1FED5E3DD976FCE0566700;
+		};
+		7157AC766425AD3D68E91EDE = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 200807076781004B39AF1CA9;
+		};
+		7179CBF5B114F17CD3BAA5B0 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 4ECEB05C408AE47A0721D9AF;
+		};
+		75739CB9709C0F7A7EA95026 = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = 244210E48437B6556980A702;
+			"proxyType" = 1;
+			"remoteGlobalIDString" = A22F1B0ACCF99867105595A3;
+			"remoteInfo" = "FantasyGlassWidgets";
+		};
+		78762D7C8E86D4B54153DDAE = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/PlayersView.swift";
+			"sourceTree" = "<group>";
+		};
+		7C0858417E8594228ED3CE0A = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.xml";
+			"path" = "Config/App-Info.plist";
+			"sourceTree" = "<group>";
+		};
+		7C310C46CC2C3AB037620E6C = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.entitlements";
+			"path" = "Config/Push.entitlements";
+			"sourceTree" = "<group>";
+		};
+		7DDFA112A427BE4855A50400 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.entitlements";
+			"path" = "Config/Widget.entitlements";
+			"sourceTree" = "<group>";
+		};
+		82F8056CE60285E0C0AF4DAB = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 190B156325615D3BEE8D253F;
+		};
+		852B7EE42D0ECC4D682B232C = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Services/RemoteClient.swift";
+			"sourceTree" = "<group>";
+		};
+		8540C070B8EA2CB6A45D2CB5 = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ENABLE_TESTABILITY" = "NO";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "PUSH_ENABLED";
+				"APS_ENVIRONMENT" = "production";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID)";
+				"INFOPLIST_FILE" = "Config/App-Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/Push.entitlements";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
+				"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME" = "AccentColor";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD" = "NO";
+			};
+			"name" = "PushRelease";
+		};
+		88A8FBADE0C2EEDC2C61B4FD = {
+			"isa" = "PBXCopyFilesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"dstPath" = "";
+			"dstSubfolderSpec" = 13;
+			"files" = (
+				CE8BB3D2CD96728917F204AC,
+			);
+			"name" = "Embed App Extensions";
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		8CB49F24EA7763991036BE40 = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		8D571BE25BAF80AEEDCDE15C = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Services/Persistence.swift";
+			"sourceTree" = "<group>";
+		};
+		8E0205CD89BF271E3726B26F = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.xcconfig";
+			"path" = "Config/Base.xcconfig";
+			"sourceTree" = "<group>";
+		};
+		900621C63942CF97857E701F = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				5AF0776BB07B1367A99FE456,
+				92CF243770F70A083086E5FC,
+				4A2428D3382CC4BB51979240,
+				8540C070B8EA2CB6A45D2CB5,
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		92CF243770F70A083086E5FC = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ENABLE_TESTABILITY" = "NO";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "";
+				"APS_ENVIRONMENT" = "production";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID)";
+				"INFOPLIST_FILE" = "Config/App-Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/Local.entitlements";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
+				"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME" = "AccentColor";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD" = "NO";
+			};
+			"name" = "Release";
+		};
+		93A1350F424E9DAAFF19F962 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 02404F78CCE5FFBF04939DFD;
+		};
+		93ECE3E950079F18E4A916E6 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/SetupViews.swift";
+			"sourceTree" = "<group>";
+		};
+		999AE31C2F1823946AF62D4A = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/MatchupsView.swift";
+			"sourceTree" = "<group>";
+		};
+		9BFEAA9B8070B068C9BB3DDE = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				A2847D34445D6B6B1FB271C9,
+				52AC68E68ACED06D96BBB94B,
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		9F923FF5CE90B8530A943625 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = F261F1ADECF35C3F6D2A1FBD;
+		};
+		A22F1B0ACCF99867105595A3 = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = 5A623D5578E62B7C155B7B51;
+			"buildPhases" = (
+				9BFEAA9B8070B068C9BB3DDE,
+				65E69DABB9113C3442C35598,
+				0BAC759074A15DE8F4D7A53C,
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+			);
+			"name" = "FantasyGlassWidgets";
+			"productName" = "FantasyGlassWidgets";
+			"productReference" = 28BAF9B0E1DA6DD75774D26A;
+			"productType" = "com.apple.product-type.app-extension";
+		};
+		A2847D34445D6B6B1FB271C9 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 47697D65E323E93433CB0034;
+		};
+		A33957989B825B18FCB2DF1B = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "AppTests/PersistenceTests.swift";
+			"sourceTree" = "<group>";
+		};
+		A6B466BAD5561615B54DA285 = {
+			"isa" = "XCSwiftPackageProductDependency";
+			"package" = 552AFB5EC1B6A8F3B1B9D25D;
+			"productName" = "FantasyCore";
+		};
+		AC88EC11719E229ADCD3BF7D = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				4E089F6B0C4E511BBF70682A,
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		B69875D5CC346DB7F3EBAB52 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 6CC10ACB9D7738458B0F51AC;
+		};
+		B8A7C4C7C43B9A2F11EEEA63 = {
+			"isa" = "PBXGroup";
+			"children" = (
+				BF4DEB4AF35F25EEFB485894,
+			);
+			"name" = "Shared";
+			"sourceTree" = "<group>";
+		};
+		B9112ECF04EC08E3DF6E43D9 = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG PUSH_ENABLED";
+				"APS_ENVIRONMENT" = "development";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID).tests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/FantasyGlass.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FantasyGlass";
+				"SKIP_INSTALL" = "YES";
+			};
+			"name" = "PushDebug";
+		};
+		B93ECE6AD841116D6E38A4DC = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				1FF88C58D46834F3546ED890,
+				82F8056CE60285E0C0AF4DAB,
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		BD1FED5E3DD976FCE0566700 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/FantasyGlassApp.swift";
+			"sourceTree" = "<group>";
+		};
+		BE641C0C597F1CE1C749398C = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ENABLE_TESTABILITY" = "NO";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "PUSH_ENABLED";
+				"APS_ENVIRONMENT" = "production";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID).widgets";
+				"INFOPLIST_FILE" = "Config/Widget-Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/Widget.entitlements";
+				"APPLICATION_EXTENSION_API_ONLY" = "YES";
+				"SKIP_INSTALL" = "YES";
+			};
+			"name" = "PushRelease";
+		};
+		BF4DEB4AF35F25EEFB485894 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Shared/MatchupActivityAttributes.swift";
+			"sourceTree" = "<group>";
+		};
+		C18598EA51CB4DBC76E3C327 = {
+			"isa" = "PBXBuildFile";
+			"productRef" = 538D1F9C6E135F531F405C70;
+		};
+		C28E40D82609CBB042FAEA49 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/PreviewSupport.swift";
+			"sourceTree" = "<group>";
+		};
+		C312A764FF8843541E9597C4 = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				C18598EA51CB4DBC76E3C327,
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		CA787894D9F84EB7696DB3BB = {
+			"isa" = "PBXTargetDependency";
+			"target" = 392DC569C58DA82A3B263A70;
+			"targetProxy" = 125E0383862244EC12C5DB92;
+		};
+		CE8BB3D2CD96728917F204AC = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = 28BAF9B0E1DA6DD75774D26A;
+			"settings" = {
+				"ATTRIBUTES" = (
+					"RemoveHeadersOnCopy",
+				);
+			};
+		};
+		D4EDA45AE57CDEABCDBF4EEB = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = C28E40D82609CBB042FAEA49;
+		};
+		D81C48B30DD553C55C9E3D68 = {
+			"isa" = "PBXGroup";
+			"children" = (
+				47697D65E323E93433CB0034,
+			);
+			"name" = "Widget";
+			"sourceTree" = "<group>";
+		};
+		DC6AAEAE7B5C92EE6790C4E3 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = A33957989B825B18FCB2DF1B;
+		};
+		E234F81BD9C197EECF10054C = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SWIFT_VERSION" = "6.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "26.0";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG ";
+				"APS_ENVIRONMENT" = "development";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_PREVIEWS" = "YES";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"PRODUCT_BUNDLE_IDENTIFIER" = "$(FANTASYGLASS_BUNDLE_ID).tests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/FantasyGlass.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FantasyGlass";
+				"SKIP_INSTALL" = "YES";
+			};
+			"name" = "Debug";
+		};
+		F17C26EEC78CA775EDB7F5BC = {
+			"isa" = "PBXTargetDependency";
+			"target" = A22F1B0ACCF99867105595A3;
+			"targetProxy" = 75739CB9709C0F7A7EA95026;
+		};
+		F261F1ADECF35C3F6D2A1FBD = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/SettingsView.swift";
+			"sourceTree" = "<group>";
+		};
+		F3DF75063428B201782532C1 = {
+			"isa" = "XCBuildConfiguration";
+			"baseConfigurationReference" = 8E0205CD89BF271E3726B26F;
+			"buildSettings" = {
+				"CLANG_WARN_DOCUMENTATION_COMMENTS" = "YES";
+				"GCC_WARN_UNUSED_VARIABLE" = "YES";
+			};
+			"name" = "Release";
+		};
+		F874AD104601F7BE359CCCC5 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = BF4DEB4AF35F25EEFB485894;
+		};
+		F905B102B4F13BD6617D8EB3 = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				14CA4F15A175777FB2150B99,
+				F3DF75063428B201782532C1,
+				1AC4B4305A16603F70A5C594,
+				0B09812C2027925C21B5E5EE,
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+	};
+	"rootObject" = 244210E48437B6556980A702;
+}

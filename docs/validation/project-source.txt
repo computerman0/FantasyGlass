@@ -1,0 +1,7 @@
+Generated 106 project objects, two schemes, and 16 app Swift sources.
+Project and schemes regenerate identically.
+OpenStep project parsed: 106 objects; all referenced source/config/resource paths exist.
+8 property lists / entitlements / privacy manifests and both XML schemes parsed.
+18 Apple-framework Swift files passed syntax parsing only; no Apple SDK type checking performed.
+Build and test shell scripts passed bash syntax checking.
+No Xcode, Apple SDK, Simulator, signing identity, IPA archive or device test was available.

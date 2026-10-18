@@ -1,0 +1,53 @@
+[
+  {
+    "name": "apple_activity_root",
+    "url": "https://developer.apple.com/tutorials/data/documentation/activitykit.json",
+    "status": 200,
+    "bytes": 19481
+  },
+  {
+    "name": "apple_push",
+    "url": "https://developer.apple.com/tutorials/data/documentation/activitykit/starting-and-updating-live-activities-with-activitykit-push-notifications.json",
+    "status": 200,
+    "bytes": 74856
+  },
+  {
+    "name": "sportsdata_trials",
+    "url": "https://sportsdata.io/developers/free-trial",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "name": "sportsdata_discovery",
+    "url": "https://sportsdata.io/discovery-lab",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "name": "sportsdata_signup",
+    "url": "https://sportsdata.io/cart/free-trial",
+    "status": 200,
+    "bytes": 310666
+  },
+  {
+    "name": "sportsdata_dictionary",
+    "url": "https://sportsdata.io/developers/data-dictionary/nfl",
+    "status": 200,
+    "bytes": 890044
+  },
+  {
+    "name": "sportradar_pricing",
+    "url": "https://sportradar.com/media-tech/data-content/sports-data-api/",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "name": "apple_activity_display",
+    "url": "https://developer.apple.com/tutorials/data/documentation/activitykit/displaying-live-data-with-live-activities.json",
+    "status": 200,
+    "bytes": 138119
+  },
+  {
+    "name": "espn_games",
+    "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401772938",
+    "status": 200,
+    "bytes": 582300
+  }
+]

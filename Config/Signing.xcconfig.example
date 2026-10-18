@@ -1,0 +1,3 @@
+// Copy to Signing.xcconfig. Never put ESPN or sports API credentials here.
+DEVELOPMENT_TEAM = YOURTEAMID
+FANTASYGLASS_BUNDLE_ID = com.yourname.FantasyGlass

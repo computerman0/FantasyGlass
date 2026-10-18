@@ -1,0 +1,77 @@
+# See docs/ONLINE_BUILD.md. No automatic triggers and no credentials in this file.
+workflows:
+  fantasyglass-unsigned:
+    name: FantasyGlass - unsigned build check
+    instance_type: mac_mini_m2
+    max_build_duration: 45
+    environment:
+      xcode: latest
+    scripts:
+      - name: Test portable core
+        script: swift test --package-path Core
+      - name: Archive native app and widget
+        script: |
+          set -euo pipefail
+          mkdir -p build
+          bash Scripts/build-ipa.sh unsigned 2>&1 | tee build/online-build.log
+    artifacts:
+      - build/unsigned/FantasyGlass-unsigned.ipa
+      - build/online-build.log
+
+  fantasyglass-testflight:
+    name: FantasyGlass - personal TestFlight
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    integrations:
+      # Name the securely stored Developer Portal API integration this exact name.
+      app_store_connect: fantasyglass-apple
+    environment:
+      xcode: latest
+      ios_signing:
+        distribution_type: app_store
+        # Replace BOTH bundle identifiers below with your registered app ID.
+        # Matching .widgets provisioning must also exist in Code signing identities.
+        bundle_identifier: com.yourname.FantasyGlass
+      vars:
+        BUNDLE_ID: com.yourname.FantasyGlass
+        PROJECT_BUILD_NUMBER: "1" # Increase after each successful upload to Apple.
+        XCODE_SCHEME: FantasyGlass # Use FantasyGlass-Push after APNs provisioning.
+    scripts:
+      - name: Configure identifiers and validate the SDK
+        script: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os, pathlib, re, subprocess
+          sdk = subprocess.check_output(['xcrun', '--sdk', 'iphoneos', '--show-sdk-version'], text=True).strip()
+          if int(sdk.split('.')[0]) < 26:
+              raise SystemExit('Select stable Xcode 26 or newer in the cloud build environment.')
+          bundle = os.environ['BUNDLE_ID']
+          version = os.environ['PROJECT_BUILD_NUMBER']
+          if bundle == 'com.yourname.FantasyGlass' or not re.fullmatch(r'[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+', bundle):
+              raise SystemExit('Set both BUNDLE_ID and ios_signing.bundle_identifier to your registered ID.')
+          if not re.fullmatch(r'[1-9][0-9]{0,3}', version):
+              raise SystemExit('Use a new integer PROJECT_BUILD_NUMBER between 1 and 9999.')
+          pathlib.Path('Config/Signing.xcconfig').write_text(
+              f'FANTASYGLASS_BUNDLE_ID = {bundle}\nCURRENT_PROJECT_VERSION = {version}\n')
+          PY
+          python3 Scripts/generate-project.py
+      - name: Test portable core
+        script: swift test --package-path Core
+      - name: Apply app and widget signing profiles
+        script: |
+          xcode-project use-profiles --custom-export-options='{"testFlightInternalTestingOnly": true}'
+      - name: Build the signed IPA
+        script: |
+          xcode-project build-ipa \
+            --project "$CM_BUILD_DIR/FantasyGlass.xcodeproj" \
+            --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        # Upload to your Apple account; choose yourself as an internal tester there.
+        # These flags avoid automatic external beta review or public App Store review.
+        submit_to_testflight: false
+        submit_to_app_store: false

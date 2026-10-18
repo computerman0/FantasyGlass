@@ -1,0 +1,26 @@
+{
+  "checkedOn": "2026-10-18",
+  "method": "HTTPS GET via urllib.request",
+  "results": [
+    {
+      "url": "https://www.espn.com/fantasy/football/",
+      "status": 200
+    },
+    {
+      "url": "https://fantasy.espn.com/football/welcome",
+      "status": 200
+    },
+    {
+      "url": "https://www.espn.com/login",
+      "status": 200
+    },
+    {
+      "url": "https://altstore.io/",
+      "status": 403
+    },
+    {
+      "url": "https://faq.altstore.io/",
+      "status": 403
+    }
+  ]
+}

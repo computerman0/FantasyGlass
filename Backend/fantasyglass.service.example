@@ -1,0 +1,23 @@
+[Unit]
+Description=FantasyGlass optional APNs worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=fantasyglass
+Group=fantasyglass
+WorkingDirectory=/opt/fantasyglass/Backend
+EnvironmentFile=/etc/fantasyglass/backend.env
+ExecStart=/usr/bin/node /opt/fantasyglass/Backend/dist/src/server.js
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/fantasyglass
+
+[Install]
+WantedBy=multi-user.target

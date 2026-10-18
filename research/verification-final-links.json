@@ -1,0 +1,88 @@
+[
+  {
+    "name": "weekly_scoreboard",
+    "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2025&seasontype=2&week=6&limit=100",
+    "status": 200,
+    "events": 15,
+    "week": {
+      "number": 6,
+      "teamsOnBye": [
+        {
+          "id": "16",
+          "uid": "s:20~l:28~t:16",
+          "location": "Minnesota",
+          "name": "Vikings",
+          "abbreviation": "MIN",
+          "displayName": "Minnesota Vikings",
+          "shortDisplayName": "Vikings",
+          "isActive": true,
+          "links": [
+            {
+              "rel": [
+                "clubhouse",
+                "desktop",
+                "team"
+              ],
+              "href": "https://www.espn.com/nfl/team/_/name/min/minnesota-vikings",
+              "text": "Clubhouse",
+              "isExternal": false,
+              "isPremium": false
+            }
+          ],
+          "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/min.png",
+          "logoDark": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/scoreboard/min.png"
+        },
+        {
+          "id": "34",
+          "uid": "s:20~l:28~t:34",
+          "location": "Houston",
+          "name": "Texans",
+          "abbreviation": "HOU",
+          "displayName": "Houston Texans",
+          "shortDisplayName": "Texans",
+          "isActive": true,
+          "links": [
+            {
+              "rel": [
+                "clubhouse",
+                "desktop",
+                "team"
+              ],
+              "href": "https://www.espn.com/nfl/team/_/name/hou/houston-texans",
+              "text": "Clubhouse",
+              "isExternal": false,
+              "isPremium": false
+            }
+          ],
+          "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/hou.png",
+          "logoDark": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/scoreboard/hou.png"
+        }
+      ]
+    },
+    "dates": [
+      "2025-10-10T00:15Z",
+      "2025-10-12T13:30Z",
+      "2025-10-12T17:00Z",
+      "2025-10-12T20:05Z",
+      "2025-10-12T20:25Z",
+      "2025-10-13T00:20Z",
+      "2025-10-13T23:15Z",
+      "2025-10-14T00:15Z"
+    ]
+  },
+  {
+    "name": "espn_home",
+    "url": "https://fantasy.espn.com/football/",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "name": "altstore",
+    "url": "https://faq.altstore.io/altstore-classic/how-to-install-altstore-windows",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "name": "sideloadly",
+    "url": "https://sideloadly.io/",
+    "status": 200
+  }
+]

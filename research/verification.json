@@ -1,0 +1,72 @@
+[
+  {
+    "name": "apple_activity",
+    "url": "https://developer.apple.com/tutorials/data/documentation/activitykit/updating-live-activities-with-activitykit-push-notifications.json",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "name": "apple_glass",
+    "url": "https://developer.apple.com/tutorials/data/documentation/swiftui/applying-liquid-glass-to-custom-views.json",
+    "status": 200,
+    "bytes": 40112
+  },
+  {
+    "name": "apple_background",
+    "url": "https://developer.apple.com/tutorials/data/documentation/backgroundtasks/choosing-background-strategies-for-your-app.json",
+    "status": 200,
+    "bytes": 33265
+  },
+  {
+    "name": "apple_membership",
+    "url": "https://developer.apple.com/support/compare-memberships/",
+    "status": 200,
+    "bytes": 200223
+  },
+  {
+    "name": "sportsdata_trial",
+    "url": "https://sportsdata.io/developers/api-documentation/nfl",
+    "status": 200,
+    "bytes": 1846443
+  },
+  {
+    "name": "sportsdata_pricing",
+    "url": "https://sportsdata.io/developers/api-documentation/nfl#player-game-stats-by-week",
+    "status": 200,
+    "bytes": 1846443
+  },
+  {
+    "name": "sportradar_trial",
+    "url": "https://developer.sportradar.com/football/docs/nfl-ig-api-basics",
+    "status": 200,
+    "bytes": 1139835
+  },
+  {
+    "name": "espn_constants",
+    "url": "https://raw.githubusercontent.com/cwendt94/espn-api/master/espn_api/football/constant.py",
+    "status": 200,
+    "bytes": 23444
+  },
+  {
+    "name": "espn_player",
+    "url": "https://raw.githubusercontent.com/cwendt94/espn-api/master/espn_api/football/player.py",
+    "status": 200,
+    "bytes": 5395
+  },
+  {
+    "name": "espn_league",
+    "url": "https://raw.githubusercontent.com/cwendt94/espn-api/master/espn_api/football/league.py",
+    "status": 200,
+    "bytes": 23252
+  },
+  {
+    "name": "espn_scoreboard",
+    "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=20251012",
+    "status": 200,
+    "bytes": 106952
+  },
+  {
+    "name": "espn_league_probe",
+    "url": "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2025/segments/0/leagues/1178049?view=mSettings&view=mTeam&view=mMatchup&view=mRoster&view=mMatchupScore",
+    "error": "HTTP Error 404: Not Found"
+  }
+]

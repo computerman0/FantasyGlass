@@ -1,0 +1,34 @@
+
+> fantasyglass-backend@1.0.0 test
+> npm run build && node --test dist/test/*.test.js
+
+
+> fantasyglass-backend@1.0.0 build
+> tsc -p tsconfig.json
+
+✔ exact decimal arithmetic and JSON number preservation (9.200099ms)
+✔ standard, half PPR, full PPR and independent league settings (0.727944ms)
+✔ shared Swift/backend scoring contract (6.008552ms)
+✔ bonuses, penalties, corrections and position overrides (0.253538ms)
+✔ real-shaped league import and live content contract (1.936279ms)
+✔ missing data and multi-week rosters cannot assert local aggregates (39.335679ms)
+✔ historical ESPN scoreboard and idle polling (5.581646ms)
+✔ provider request construction and private auth (10.494178ms)
+✔ provider cooldown and error responses (8.163776ms)
+✔ event transitions, thresholds and stat correction results (5.910517ms)
+✔ encrypted persistence, deduplication, retry and deletion (17.08978ms)
+✔ configuration changes reset event baselines and token rotation removes obsolete pushes (4.353382ms)
+✔ map key ordering does not reset persisted notification baselines (40.977503ms)
+✔ APNs JWT signature uses ES256 and cached tokens (9.382741ms)
+✔ validation rejects header injection, invalid rules and arbitrary destinations (1.430797ms)
+✔ authenticated HTTP import, status and deletion never echo secrets (207.771912ms)
+✔ scheduled refresh retains cached frame during provider outage (15.693773ms)
+✔ public ESPN request through the backend adapter (1522.623596ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2127.143464

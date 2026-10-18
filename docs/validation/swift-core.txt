@@ -1,0 +1,76 @@
+[0/1] Planning build
+Building for debugging...
+[0/4] Write sources
+[2/4] Write swift-version-7F63EEAC4275FE.txt
+[4/7] Compiling FantasyCore Networking.swift
+[5/8] Compiling FantasyCore Scoring.swift
+[6/9] Emitting module FantasyCore
+[7/9] Compiling FantasyCore Models.swift
+[8/11] Compiling FantasyCore ESPNProvider.swift
+[9/11] Compiling FantasyCore SportsDataIOProvider.swift
+[10/11] Compiling FantasyCore Notifications.swift
+[11/19] Wrapping AST for FantasyCore for debugging
+[13/22] Emitting module FantasyCoreTests
+[14/22] Compiling FantasyCoreTests ScoringTests.swift
+[15/22] Compiling FantasyCoreTests ProviderTests.swift
+[16/23] /workspace/FantasyGlass/Core/.build/x86_64-unknown-linux-gnu/debug/FantasyCorePackageDiscoveredTests.derived/all-discovered-tests.swift
+[17/24] Write sources
+[18/24] Wrapping AST for FantasyCoreTests for debugging
+[20/27] Compiling FantasyCorePackageDiscoveredTests FantasyCoreTests.swift
+[21/27] Compiling FantasyCorePackageDiscoveredTests all-discovered-tests.swift
+[22/27] Emitting module FantasyCorePackageDiscoveredTests
+[24/27] Emitting module FantasyCorePackageTests
+[25/27] Write Objects.LinkFileList
+[26/27] Linking FantasyCorePackageTests.xctest
+Build complete! (4.42s)
+Test Suite 'All tests' started at 2026-10-18 17:08:08.314
+Test Suite 'debug.xctest' started at 2026-10-18 17:08:08.315
+Test Suite 'debug.xctest' passed at 2026-10-18 17:08:08.315
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'All tests' passed at 2026-10-18 17:08:08.315
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+◇ Test run started.
+↳ Testing Library Version: 6.2 (3fdabe5392108d8)
+↳ Target Platform: x86_64-unknown-linux-gnu
+◇ Test sharedBackendScoringContract() started.
+◇ Test decimalCapacityIsReportedInsteadOfClaimingAccuracy() started.
+◇ Test leagueImportAndLocalTotals() started.
+◇ Test malformedRuleIsExplicit() started.
+◇ Test allenBreakdown() started.
+◇ Test receptionFormats(ppr:expected:) started.
+◇ Test onePlayerDifferentLeaguesAndPositionRules() started.
+◇ Test optionalProviderRequiresExplicitCoverage() started.
+◇ Test customBonusNegativeAndFractions() started.
+◇ Test missingRawStatsDoNotBecomeZero() started.
+◇ Test scoreboardAndRefreshPolicy() started.
+◇ Test authenticatedRequestAndErrors() started.
+◇ Test rateLimitIsSharedAndHonorsRetryAfter() started.
+◇ Test publicESPNLiveSmoke() started.
+◇ Test alertTransitionsAndFirstRefresh() started.
+◇ Test kickerAndDefense() started.
+◇ Test decimalRoundTripNeverSilentlyRounds() started.
+◇ Test correctionsReplaceRatherThanAccumulate() started.
+◇ Test serverRetryRecovers() started.
+◇ Test case passing 2 arguments ppr → "0", expected → "21.6" to receptionFormats(ppr:expected:) started.
+◇ Test case passing 2 arguments ppr → "0.5", expected → "25.1" to receptionFormats(ppr:expected:) started.
+◇ Test case passing 2 arguments ppr → "1", expected → "28.6" to receptionFormats(ppr:expected:) started.
+✔ Test sharedBackendScoringContract() passed after 0.023 seconds.
+✔ Test malformedRuleIsExplicit() passed after 0.023 seconds.
+✔ Test allenBreakdown() passed after 0.023 seconds.
+✔ Test receptionFormats(ppr:expected:) with 3 test cases passed after 0.023 seconds.
+✔ Test onePlayerDifferentLeaguesAndPositionRules() passed after 0.023 seconds.
+✔ Test optionalProviderRequiresExplicitCoverage() passed after 0.023 seconds.
+✔ Test customBonusNegativeAndFractions() passed after 0.023 seconds.
+✔ Test decimalCapacityIsReportedInsteadOfClaimingAccuracy() passed after 0.024 seconds.
+✔ Test leagueImportAndLocalTotals() passed after 0.024 seconds.
+✔ Test missingRawStatsDoNotBecomeZero() passed after 0.023 seconds.
+✔ Test rateLimitIsSharedAndHonorsRetryAfter() passed after 0.023 seconds.
+✔ Test authenticatedRequestAndErrors() passed after 0.024 seconds.
+✔ Test alertTransitionsAndFirstRefresh() passed after 0.024 seconds.
+✔ Test kickerAndDefense() passed after 0.023 seconds.
+✔ Test correctionsReplaceRatherThanAccumulate() passed after 0.023 seconds.
+✔ Test decimalRoundTripNeverSilentlyRounds() passed after 0.025 seconds.
+✔ Test scoreboardAndRefreshPolicy() passed after 0.030 seconds.
+✔ Test serverRetryRecovers() passed after 0.522 seconds.
+✔ Test publicESPNLiveSmoke() passed after 4.017 seconds.
+✔ Test run with 19 tests in 0 suites passed after 4.018 seconds.

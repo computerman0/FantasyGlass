@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://docs.codemagic.io/yaml-code-signing/signing-ios/",
+    "status": 200,
+    "excerpts": [
+      "ironment variables Running builds Scheduling builds Build timeout settings Webhooks Starting builds automatically Testing Running tests Testing on Firebase Test Lab Testing with emulator.wtf Registering iOS test devices Detox (E2E) test automation Code signing Signing iOS apps Signing macOS apps Signing Andr",
+      "Email Sending Build Notifications to Telegram Slack Build status badges Release notes GitHub Checks Integrations AppDome integration Appetize integration Appknox integration BrowserStack integration Capawesome Cloud integration Capgo integration Codecov integration Dart Code Metrics integration Discord integra",
+      "tion Emerge Tools integration Fastlane integration Jenkins integration Jira integration Katalon integration Kobiton integration LambdaTest integration Maestro integration Microsoft Teams integration Patrol integration pCloudy integration Perfecto integration Rock (formerly RNEF) integration Sentry integrat",
+      "ion Sofy integration SonarCloud integration Configuration Basic configuration Building Flutter projects Workflows Adding environment variables Using environment variables Built-in environment variables Custom build steps Moving From Workflow E",
+      "ditor to YAML Running builds Scheduling builds Build timeout settings Webhooks Starting builds automatically Testing Running automated tests Static code analysis Testing widgets Registering iOS test devices Code signing iOS code signing macOS code signing Android code signing Publishing to the stores Ap",
+      "ons Email and Slack notifications Release notes Advanced configuration Codemagic Build machine type Automatic build versioning Build inputs Caching Codemagic CLI tools Screenshots Git Generating an SSH key Accessing private dependencies and Git submodules Adding a Git tag with app version Accessing Git LFS U",
+      "ting a local .env file Installing a different Unity version Flutter Shader Compilation Custom Slack Integration with Codemagic Importing variables from JSON White Label Apps White labeling overview White label branching and workflow strategies Supply Chain Security Provenance attestation Codemagic REST API API",
+      "Native CodePush (Legacy) Concepts Setup Releasing updates Production control Security and access CI integration Issues and debugging CodePush analytics CLI quick reference Advanced: sync options OTA updates for Ionic Capacitor apps Troubleshooting Getting help and support Remote access to the build machine Com",
+      "agic Knowledge for AI Agents Billing & Pricing Billing Pricing Software and hardware macOS machines Xcode 27.2.x (edge) Xcode 27.1.x Xcode 27.0.x Xcode 26.6.x (default) Xcode 26.5.x Xcode 26.4.x Xcode 26.3.x Xcode 26.2.x Xcode 26.1.x Xcode 26.0.x Xcode 16.4.x Xcode 16.3.x Xcode 16.2.x Xcode 16.1.x Xcode ",
+      "16.0.x Linux machines Ubuntu 24.04 Windows machines Windows 2022 Xcode update policy Codemagic Blog YouTube GitHub Discussions Signing iOS apps .YAML Code signing Signing iOS apps How to set up iOS code signing in codemagic.yaml All iOS applications have to be digitally",
+      "l team members can view the file info for any of the uploaded files. Creating the App Store Connect API key Signing iOS applications requires Apple Developer Program membership. It is recommended to create a dedicated App Store Connect API key for Codemagic in App Store Connect . To do so: Log in to App St",
+      "ore Connect and navigate to Users and Access > Integrations &#187; App Store Connect API . Click on the + sign to generate a new API key. Enter the name for the key and select an access level. We recommend choosing App Manager access rights, read more about ",
+      " . As soon as the key is generated, you can see it added to the list of active keys. Click Download API Key to save the private key for later. Note that the key can only be downloaded once. Take note of the Issuer ID above the table of active keys as well as the Key ID of the generated key as these will be",
+      " required when setting up the Apple Developer Portal integration in the Codemagic UI. Adding the App Store Connect API key to Codemagic Open your Codemagic Team settings, go to Team integrations > Developer Portal > Manage keys . Click the Add key button. Enter th",
+      "e App Store Connect API key name . This is a human readable name for the key that will be used to refer to the key later in application settings. Enter the Issuer ID and Key ID values. Click on Choose a .p8 file or drag the fil",
+      "e to upload the App Store Connect API key downloaded earlier. Click Save . Adding the Code signing certificate Codemagic lets you upload code signing certificates as PKCS#12 archives containing both the certificate and the private key which ",
+      "assword and choose a Reference name . Click Add certificate If you have added the App Store Connect API key to Codemagic, you can also generate a new Apple Development or Apple Distribution certificate. Open your Codemagic Team settings, go to codemagic.yaml settings > Code signing identities . Open iOS ce",
+      "de a Reference name for the certificate. Choose the Certificate type . Select the App Store Connect API key to use. Click Create certificate . Once the certificate has been created, Codemagic will allow you to download the certificate and provides the password for it. After downloading, please follow the s",
+      "isting certificate manually. Existing signing certificates previously generated by Codemagic can be automatically fetched from Apple Developer Portal based on your team&rsquo;s App Store Connect API key. Fetching a certificate that was not generated by Codemagic is not possible because each certificate is li",
+      "ning identities (a green checkmark in the Certificate field) or not. Note: If your app contains app extensions, an additional provisioning profile is required for each extension. Codemagic will use the bundle identifier to find the relevant provisioning profiles. If your bundle identifier is com.example.app ",
+      " profile Fetch from Developer Portal You can upload provisioning profiles with the .mobileprovision extension, providing a unique Reference name is required for each uploaded profile. Open your Codemagic Team settings, go to codemagic.yaml settings > Code signing identities . Open iOS provisioning profiles t",
+      " it into the indicated frame. Enter the Reference name for the profile. Click Add profile . You can automatically fetch the provisioning profiles from the Apple Developer Portal based on your team&rsquo;s App Store Connect API key. The bundle identifier is listed for every available profile along with its na"
+    ]
+  },
+  {
+    "url": "https://docs.codemagic.io/yaml-publishing/app-store-connect/",
+    "status": 200,
+    "excerpts": [
+      "ironment variables Running builds Scheduling builds Build timeout settings Webhooks Starting builds automatically Testing Running tests Testing on Firebase Test Lab Testing with emulator.wtf Registering iOS test devices Detox (E2E) test automation Code signing Signing iOS apps Signing macOS apps Signing Andr",
+      "Email Sending Build Notifications to Telegram Slack Build status badges Release notes GitHub Checks Integrations AppDome integration Appetize integration Appknox integration BrowserStack integration Capawesome Cloud integration Capgo integration Codecov integration Dart Code Metrics integration Discord integra",
+      "tion Emerge Tools integration Fastlane integration Jenkins integration Jira integration Katalon integration Kobiton integration LambdaTest integration Maestro integration Microsoft Teams integration Patrol integration pCloudy integration Perfecto integration Rock (formerly RNEF) integration Sentry integrat",
+      "ion Sofy integration SonarCloud integration Configuration Basic configuration Building Flutter projects Workflows Adding environment variables Using environment variables Built-in environment variables Custom build steps Moving From Workflow E",
+      "ditor to YAML Running builds Scheduling builds Build timeout settings Webhooks Starting builds automatically Testing Running automated tests Static code analysis Testing widgets Registering iOS test devices Code signing iOS code signing macOS code signing Android code signing Publishing to the stores Ap",
+      "ons Email and Slack notifications Release notes Advanced configuration Codemagic Build machine type Automatic build versioning Build inputs Caching Codemagic CLI tools Screenshots Git Generating an SSH key Accessing private dependencies and Git submodules Adding a Git tag with app version Accessing Git LFS U",
+      "ting a local .env file Installing a different Unity version Flutter Shader Compilation Custom Slack Integration with Codemagic Importing variables from JSON White Label Apps White labeling overview White label branching and workflow strategies Supply Chain Security Provenance attestation Codemagic REST API API",
+      "Native CodePush (Legacy) Concepts Setup Releasing updates Production control Security and access CI integration Issues and debugging CodePush analytics CLI quick reference Advanced: sync options OTA updates for Ionic Capacitor apps Troubleshooting Getting help and support Remote access to the build machine Com",
+      "agic Knowledge for AI Agents Billing & Pricing Billing Pricing Software and hardware macOS machines Xcode 27.2.x (edge) Xcode 27.1.x Xcode 27.0.x Xcode 26.6.x (default) Xcode 26.5.x Xcode 26.4.x Xcode 26.3.x Xcode 26.2.x Xcode 26.1.x Xcode 26.0.x Xcode 16.4.x Xcode 16.3.x Xcode 16.2.x Xcode 16.1.x Xcode ",
+      "16.0.x Linux machines Ubuntu 24.04 Windows machines Windows 2022 Xcode update policy Codemagic Blog YouTube GitHub Discussions App Store Connect publishing using codemagic.yaml .YAML Publishing to the stores App Store Connect publishing using codemagic.yaml How to deplo",
+      "y an app to App Store and TestFlight using codemagic.yaml Codemagic enables you to automatically publish your iOS or macOS app to App Store Connect for beta testing with TestFlight or distributing the app to users via App Store. Codemagic uses the App Store Connect API key for authenticating",
+      " communication with Apple&rsquo;s services. You can read more about generating an API key from Apple&rsquo;s documentation page . Note: This guide only applies to workflows configured with codemagic.yaml . If your workflow is configured with the Flutter workflow editor please go to Publis",
+      "re Connect, it must be code signed with a distribution certificate . Creating the App Store Connect API key Signing iOS applications requires Apple Developer Program membership. It is recommended to create a dedicated App Store Connect API key for Codemagic in App Store Connect . To do so: Log in to App St",
+      "ore Connect and navigate to Users and Access > Integrations &#187; App Store Connect API . Click on the + sign to generate a new API key. Enter the name for the key and select an access level. We recommend choosing App Manager access rights, read more about ",
+      " . As soon as the key is generated, you can see it added to the list of active keys. Click Download API Key to save the private key for later. Note that the key can only be downloaded once. Take note of the Issuer ID above the table of active keys as well as the Key ID of the generated key as these will be",
+      " required when setting up the Apple Developer Portal integration in the Codemagic UI. Setting up publishing to App Store Connect There are two options for setting up publishing to App Store Connect. You can either connect the Apple Developer Portal integration in ",
+      "the UI and reference the API key name in codemagic.yaml , or add the API key along with the required metadata as environment variables and reference them in your configuration file. Using Apple Developer Portal integration Using environment variables Connect the Apple Develop",
+      "er Portal integration for your team/account The Apple Developer Portal integration can be enabled in the Team integrations section in your team settings (if you&rsquo;re a team admin). This allows you to conveniently use the same access credentials for automatic code signing and pu",
+      "blishing across different apps and workflows. In the list of available integrations, click the Connect button for Developer Portal . In the App Store Connect API key name , provide a name for the key you are going to set up the integration with. This is for identifying the key in C",
+      "r ID related to your Apple Developer account. You can find it above the table of active keys on the Integrations tab of the Users and Access page. Enter the Key ID of the key to be used for code signing. In the API key field, upload the private API key downloaded from App Store Connect. Click Save to finish th",
+      "ou can delete existing keys or add new ones when you click Manage keys next to the Developer Portal integration in personal account or team settings. Distribution to App Store Connect The following snippet demonstrates how to authenticate with and upload the IPA to App Store Connect, submit the build to beta t",
+      "equired screenshots and providing the values for the privacy policy URL and application category. # Integration section is required to make use of the keys stored in # Codemagic UI under Apple Developer Portal integration. workflows : ios-workflow : name : iOS Workflow integrations : app_store_connect : &lt;Ap"
+    ]
+  },
+  {
+    "url": "https://docs.codemagic.io/yaml-quick-start/building-a-native-ios-app/",
+    "initialError": "<urlopen error Tunnel connection failed: 502 Bad Gateway>",
+    "retryStatus": 200,
+    "retryResult": "Native iOS YAML examples retrieved successfully on two follow-up requests."
+  },
+  {
+    "url": "https://codemagic.io/pricing/",
+    "status": 200,
+    "excerpts": [
+      "Use Codemagic CI/CD for Flutter React Native Native iOS Native Android Ionic Unity Learn more about Integrations White label OTA Pricing Enterprise Documentation What's new Get Demo Login Sign up Return to app Log out Predictable, simple pricing. Transparent pricing for teams of all sizes. Mobile CI/CD OTA upd",
+      "minutes Windows minutes Applications and team members Concurrent builds 3 Additional concurrency $1,500/concurrency $1,800/concurrency $3,000/concurrency Burstable concurrencies Concurrency price above baseline $50/concurrency $60/concurrency Concurrency price below baseline $150/concurrency $180/concu",
+      "e OTA updates for React Native apps with unlimited releases, storage, and bandwidth. First 100K MAU Free Each additional 100K MAU $99/month Free trial Number of releases Storage Bandwidth Deployment analytics Upfront payment Up to 12 months Invoicing From 1M MAU Estimate your cost Monthly Active Users 1",
+      ",000,000 100K 200K 300K 400K 500K 1M 2M 5M 10M Monthly $891 / month Yearly $9,622 / year 10% off Contact sales Need a dedicated server? Used exclusively by your organization, with optional hosting in your region. Signed SLAs, NDAs, ",
+      "nclude applicable taxes. For individuals Single-user plan with unlimited number of applications and 500 free build minutes refilled every month. Get started Unlimited applications 500 free macOS M2 minutes / month Max 1 parallel build Community support For enterprises Starting from $12,000 / year Tailo",
+      "Purchase Codemagic directly through AWS Marketplace or Google Cloud Marketplace . Compare our plans Free Get started Pay as you go Get started Fixed price Get started Enterprise Contact sales Base cost $0 / month $0 / month $3,990 / year $12,000 / year Key features Team members 1 Unlimited Unlimited Unl",
+      "M2 Mac mini M2 Mac mini M2 Custom Included number of parallel builds 1 1 3 3 Included build minutes 500 minutes refilled monthly, then standard rates apply Unlimited Unlimited Build history & artifact storage 30 days 60 days 1 year 1 year by default Single-sign on (SSO) Audit Log Connector Mobile CI/CD",
+      "es Dedicated machines & network Additional parallel builds N/A $49 / concurrency / month Up to 3 $1,500 / concurrency / year Up to 10 Custom Burstable concurrencies Custom Build duration limit 120 min 120 min 120 min Custom Cache storage 3GB per build 10GB per build 10GB per build Custom Build minutes ",
+      "x & Windows machines $0.045 / minute $0.045 / minute Unlimited Unlimited Mac mini M2 machines first 500 / month - $0, then $0.095 / minute $0.095 / minute Unlimited Unlimited Mac mini M4 machines $0.114 / minute $0.114 / minute Available on request Available on request Mac mini M4 Pro machines N/A N/A ",
+      "ta is processed in accordance with GDPR/CCPA Common questions Do you offer discounts? Yes. We offer free accounts for teachers, students and non-profits. How does billing work? On the Pay-as-you-go plan, we charge your card for the previous month\u2019s usage on the first day of each month. We use Stripe to ",
+      "s for long-term or high-volume customers. Contact our Sales team to explore available options. Is a free tier available? Yes. If you have under 100K monthly active users you can use our managed hosted Patch service for free. Is there a free trial? Yes. You can start a free trial to evaluate Codemagic Pa",
+      "tch before committing. For the free trial or custom plans, get in touch with our Sales team . Grow your business with Codemagic Sign up today and deliver your apps in record time Start building now Product Pricing Customer Stories Term"
+    ]
+  },
+  {
+    "url": "https://codemagic.io/codemagic-schema.json",
+    "status": 200,
+    "result": "Configuration validated successfully against this JSON schema."
+  },
+  {
+    "url": "https://raw.githubusercontent.com/codemagic-ci-cd/cli-tools/master/src/codemagic/tools/xcode_project.py",
+    "status": 200,
+    "result": "Verified build-ipa and use-profiles entry points; no hosted execution."
+  }
+]
