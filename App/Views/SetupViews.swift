@@ -256,7 +256,7 @@ struct BackendSetupView: View {
                                 model.preferences.remoteEnabled = true
                                 _ = try await model.notifications.requestAuthorization(remote:true)
                                 await model.syncRemote()
-                                status = "Remote mode enabled. Re-pin the matchup to request a Live Activity push token."
+                                status = "Remote notifications enabled. Delivery requires successful device registration and an active backend."
                             } catch { status = error.localizedDescription }
                         }
                     }.disabled(!consent || busy || !AppModel.supportsPushBuild).buttonStyle(.glassProminent)

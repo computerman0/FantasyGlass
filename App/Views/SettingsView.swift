@@ -44,7 +44,7 @@ struct SettingsView: View {
                     }
                 }
                 Section("About the data") {
-                    Text("FantasyGlass 1.0 · Native iOS 26\nESPN is an unofficial read-only provider. Local rule edits do not change ESPN. All score precision is preserved; values are not silently rounded. Win probability is unavailable without a calibrated model.").font(.footnote).foregroundStyle(.secondary)
+                    Text("FantasyGlass 1.0.1 · Native iOS 26\nESPN is an unofficial read-only provider. Local rule edits do not change ESPN. All score precision is preserved; values are not silently rounded. Win probability is unavailable without a calibrated model.").font(.footnote).foregroundStyle(.secondary)
                     Text("Cached data stays on this device. Secrets use Keychain and are excluded from device migration. No analytics SDK is included.").font(.footnote).foregroundStyle(.secondary)
                 }
             }.navigationTitle("Settings")

@@ -19,11 +19,18 @@ jobs:
           path: diagnostics
           run-id: ${{ inputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Print app launch logs
+      - name: Inspect simulator launch output
         run: |
           python3 - <<'PY'
+          import base64, textwrap
           from pathlib import Path
-          for path in Path('diagnostics').rglob('*.log'):
-              print(path)
-              print(path.read_text())
+          for pattern in ['*.log', '*.ips', '*.crash']:
+              for path in Path('diagnostics').rglob(pattern):
+                  print(path)
+                  print(path.read_text())
+          for path in Path('diagnostics').rglob('*.png'):
+              if path.name not in ['native.png', 'container.png']: continue
+              print('SCREENSHOT_BEGIN ' + path.name)
+              print('\n'.join(textwrap.wrap(base64.b64encode(path.read_bytes()).decode(), 120)))
+              print('SCREENSHOT_END ' + path.name)
           PY
