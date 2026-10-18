@@ -12,9 +12,15 @@ SIM_DESTINATION="${1:-platform=iOS Simulator,name=iPhone 17}"
 xcodebuild -project "$PROJECT_ROOT/FantasyGlass.xcodeproj" -scheme FantasyGlass -configuration Debug \
   -destination "$SIM_DESTINATION" -derivedDataPath "$PROJECT_ROOT/build/TestDerivedData" \
   CODE_SIGNING_ALLOWED=NO build-for-testing
+LAUNCH_STATUS=0
 if [[ "$SIM_DESTINATION" == *id=* ]]; then
-  python3 "$PROJECT_ROOT/Scripts/smoke-ios.py" "$SIM_DESTINATION" "$PROJECT_ROOT/build/TestDerivedData/Build/Products/Debug-iphonesimulator/FantasyGlass.app"
+  python3 "$PROJECT_ROOT/Scripts/smoke-ios.py" "$SIM_DESTINATION" "$PROJECT_ROOT/build/TestDerivedData/Build/Products/Debug-iphonesimulator/FantasyGlass.app" || LAUNCH_STATUS=$?
 fi
+TEST_STATUS=0
 xcodebuild -project "$PROJECT_ROOT/FantasyGlass.xcodeproj" -scheme FantasyGlass -configuration Debug \
   -destination "$SIM_DESTINATION" -derivedDataPath "$PROJECT_ROOT/build/TestDerivedData" \
-  -resultBundlePath "$PROJECT_ROOT/build/Tests-$(date +%Y%m%d-%H%M%S).xcresult" CODE_SIGNING_ALLOWED=NO test-without-building
+  -resultBundlePath "$PROJECT_ROOT/build/Tests-$(date +%Y%m%d-%H%M%S).xcresult" CODE_SIGNING_ALLOWED=NO test-without-building || TEST_STATUS=$?
+if [[ "$LAUNCH_STATUS" -ne 0 || "$TEST_STATUS" -ne 0 ]]; then
+  printf 'Launch check exit status: %s; XCTest exit status: %s\n' "$LAUNCH_STATUS" "$TEST_STATUS" >&2
+  exit 1
+fi
