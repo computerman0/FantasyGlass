@@ -7,20 +7,12 @@ struct MatchupsView: View {
         NavigationStack {
             List {
                 if model.leagues.isEmpty { ContentUnavailableView("No matchups yet",systemImage:"sportscourt",description:Text("Connect a league in the Leagues tab.")) }
-                if let id = model.leagues.first(where: { $0.id == model.preferences.defaultMatchup })?.id {
-                    Section { Button("Track default matchup",systemImage:"capsule.inset.filled") { Task { await model.track(id) } }.buttonStyle(.glass) }
-                }
                 ForEach(model.leagues) { league in
                     Section {
                         NavigationLink { MatchupDetailView(model:model,connectionID:league.id) } label: { MatchupCard(league:league,model:model) }
-                        if league.opponent != nil {
-                            Button(model.activities.trackedConnection == league.id ? "Tracking in Dynamic Island" : "Track in Dynamic Island",systemImage:"capsule.inset.filled") { Task { await model.track(league.id) } }
-                                .buttonStyle(.glass).disabled(model.activities.trackedConnection == league.id)
-                        }
                     }
                 }
-                if model.activities.trackedConnection != nil { Button("End Live Activity",role:.destructive) { Task { await model.endTracking() } } }
-                Section { Text(model.preferences.remoteEnabled ? model.remoteStatus : "Local activity updates occur while the app runs. iOS may suspend updates when you leave the app. Configure the optional APNs backend for remote updates.").font(.footnote).foregroundStyle(.secondary) }
+                Section { Text("Scores refresh while the app is open. Pull down to refresh now.").font(.footnote).foregroundStyle(.secondary) }
             }.navigationTitle("Matchups").refreshable { await model.refresh() }
         }
     }
@@ -45,13 +37,6 @@ struct MatchupDetailView: View {
                         }
                     }
                     Section { MatchupCard(league:league,model:model) }
-                    if league.opponent != nil {
-                        Section {
-                            Button("Track in Dynamic Island",systemImage:"capsule.inset.filled") { Task { await model.track(league.id) } }.buttonStyle(.glassProminent)
-                            Button(model.preferences.defaultMatchup == league.id ? "Default matchup selected" : "Use as default matchup",systemImage:"star") { model.preferences.defaultMatchup = league.id }
-                            if model.activities.trackedConnection == league.id { Button("End tracking",role:.destructive) { Task { await model.endTracking() } } }
-                        }
-                    }
                     if let mine = league.team { roster(mine,league:league) }
                     if let opponent = league.opponent { roster(opponent,league:league) }
                     let warnings = Array(Set(league.snapshot.warnings + (league.team.map { model.summary($0,league:league).warnings } ?? []))).sorted()

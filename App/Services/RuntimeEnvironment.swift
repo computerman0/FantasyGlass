@@ -6,5 +6,5 @@ enum RuntimeEnvironment {
     static let isLiveContainer = ProcessInfo.processInfo.environment["LC_HOME_PATH"] != nil
         || ProcessInfo.processInfo.environment["LP_HOME_PATH"] != nil
 
-    static let containerLimitations = "LiveContainer mode: foreground league tracking only. Dynamic Island, widgets, notifications and background refresh require FantasyGlass to be installed as its own signed app."
+    static let containerLimitations = "LiveContainer mode: foreground league tracking only. Notifications and background refresh require FantasyGlass to be installed as its own signed app."
 }

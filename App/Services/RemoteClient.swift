@@ -16,8 +16,6 @@ struct RemoteSubscription: Codable {
     var season: Int
     var teamID: Int
     var matchupID: String?
-    var activityToken: String?
-    var activityStartedAt: Double?
     var deviceToken: String?
     var s2: String?
     var swid: String?

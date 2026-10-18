@@ -7,8 +7,6 @@ import FantasyCore
 
 struct AppPreferences: Codable, Equatable {
     var onboardingComplete = false
-    var liveActivitiesEnabled = true
-    var defaultMatchup = ""
     var remoteEnabled = false
     var backendURL = ""
     var sportsProvider = "espn"
@@ -69,7 +67,6 @@ private struct ESPNAccountSecret: Codable { var s2: String; var swid: String }
             catch { message = "Settings could not be saved: \(error.localizedDescription)" }
         }
     }
-    let activities = LiveActivityService()
     let keychain = KeychainStore()
     let repository: LeagueRepository
     let provider: ESPNProvider
@@ -87,7 +84,6 @@ private struct ESPNAccountSecret: Codable { var s2: String; var swid: String }
             leagues = try repository.load()
             gamesByWeek = try repository.read([String:[NFLGame]].self,key:"games") ?? [:]
         } catch { message = "Could not read cached data: \(error.localizedDescription). The stored data has not been deleted." }
-        activities.onTokenChange = { [weak self] in await self?.syncRemote() }
     }
     var allGames: [NFLGame] {
         var map: [String:NFLGame] = [:]
@@ -142,7 +138,6 @@ private struct ESPNAccountSecret: Codable { var s2: String; var swid: String }
         if preferences.remoteEnabled, let token = try keychain.read("backend.token") {
             try await remote.remove(id:"\(preferences.deviceID):\(id)",baseURL:preferences.backendURL,token:token)
         }
-        if activities.trackedConnection == id { await activities.end() }
         try repository.remove(id)
         leagues.removeAll { $0.id == id }
     }
@@ -153,11 +148,7 @@ private struct ESPNAccountSecret: Codable { var s2: String; var swid: String }
         // Rule edits must not masquerade as on-field events or stat corrections.
         leagues[index].event = nil
         try repository.save(leagues[index])
-        let updated = leagues[index]
-        Task {
-            await activities.update(updated,games:games(for:updated))
-            await syncRemote()
-        }
+        Task { await syncRemote() }
     }
     @discardableResult func refresh() async -> Bool {
         guard !refreshing else { return false }
@@ -219,7 +210,6 @@ private struct ESPNAccountSecret: Codable { var s2: String; var swid: String }
                 }
                 if state.event?.scope != frame.scope { state.delivered = [] }
                 state.event = frame
-                await activities.update(state,games:games(for:state))
             } catch {
                 successful = false
                 if Task.isCancelled { break }
@@ -274,16 +264,6 @@ private struct ESPNAccountSecret: Codable { var s2: String; var swid: String }
         do { try BGTaskScheduler.shared.submit(request); backgroundStatus = "Refresh requested; iOS chooses when it runs" }
         catch { backgroundStatus = "Background refresh unavailable: \(error.localizedDescription)" }
     }
-    func track(_ id: String) async {
-        guard !RuntimeEnvironment.isLiveContainer else { message = RuntimeEnvironment.containerLimitations; return }
-        guard preferences.liveActivitiesEnabled else { message = "Enable Live Activities in FantasyGlass Settings first."; return }
-        guard let state = leagues.first(where: { $0.id == id }) else { return }
-        do {
-            try await activities.start(state,games:games(for:state),remote:preferences.remoteEnabled && Self.supportsPushBuild)
-            await syncRemote()
-        } catch { message = error.localizedDescription }
-    }
-    func endTracking() async { await activities.end(); await syncRemote() }
     func syncRemote() async {
         guard preferences.remoteEnabled else { return }
         guard Self.supportsPushBuild else { remoteStatus = "This build has no APNs entitlement. Use the Push build with paid provisioning."; return }
@@ -293,8 +273,6 @@ private struct ESPNAccountSecret: Codable { var s2: String; var swid: String }
                 let auth = try credentials(account:state.connection.accountID)
                 let payload = RemoteSubscription(id:"\(preferences.deviceID):\(state.id)",connectionID:state.id,leagueID:state.connection.leagueID,
                     season:state.connection.season,teamID:state.connection.teamID,matchupID:state.matchup?.id,
-                    activityToken:preferences.liveActivitiesEnabled ? activities.token(for:state.id) : nil,
-                    activityStartedAt:activities.startedAt(for:state.id)?.timeIntervalSince1970,
                     deviceToken:try keychain.read("apns.deviceToken"),s2:auth?.s2,swid:auth?.swid,
                     rules:state.localOverride?.rules.map(RemoteRule.init),ruleIssues:state.localOverride?.issues ?? [],
                     enabledAlerts:preferences.alerts.enabled.map(\.rawValue),thresholds:preferences.alerts.thresholds.mapValues(\.exact),
@@ -311,7 +289,6 @@ private struct ESPNAccountSecret: Codable { var s2: String; var swid: String }
         }
         preferences.remoteEnabled = false
         remoteStatus = "Disabled; server subscriptions removed"
-        await activities.end()
     }
     func open(_ url: URL) {
         guard let link = MatchupLink.parse(url) else { return }

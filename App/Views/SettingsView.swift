@@ -18,17 +18,6 @@ struct SettingsView: View {
                     NavigationLink { SportsSetupView(model:model) } label: { Label("Sports data providers",systemImage:"waveform.path.ecg") }
                     NavigationLink { BackendSetupView(model:model) } label: { Label("APNs and backend",systemImage:"antenna.radiowaves.left.and.right") }
                 }
-                Section("Live Activities") {
-                    Toggle("Enable Live Activities",isOn:$model.preferences.liveActivitiesEnabled)
-                        .disabled(RuntimeEnvironment.isLiveContainer)
-                        .onChange(of:model.preferences.liveActivitiesEnabled) { _,enabled in if !enabled { Task { await model.endTracking() } } }
-                    Picker("Default matchup",selection:$model.preferences.defaultMatchup) {
-                        Text("Choose when tracking").tag("")
-                        ForEach(model.leagues) { Text("\($0.snapshot.name) · \($0.team?.name ?? "")").tag($0.id) }
-                    }
-                    Text("An activity lasts at most eight hours in Dynamic Island. Reopen FantasyGlass to pin another session. Tap the activity to open its exact matchup.").font(.caption).foregroundStyle(.secondary)
-                    Text(model.preferences.remoteEnabled ? model.remoteStatus : "Local updates only. Refreshes are not guaranteed while suspended.").font(.caption).foregroundStyle(.secondary)
-                }
                 Section("Notifications") {
                     Button("Request notification permission") {
                         Task {

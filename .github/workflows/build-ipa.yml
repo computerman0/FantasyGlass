@@ -33,7 +33,7 @@ jobs:
           xcrun --sdk iphoneos --show-sdk-version
       - name: Test the portable scoring and provider core
         run: swift test --package-path Core
-      - name: Archive app and widget without signing
+      - name: Archive app without signing
         run: |
           set -o pipefail
           mkdir -p build

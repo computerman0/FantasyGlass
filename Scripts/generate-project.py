@@ -52,18 +52,12 @@ def app_settings(configuration):
             'CODE_SIGN_ENTITLEMENTS':'Config/Push.entitlements' if configuration.startswith('Push') else 'Config/Local.entitlements',
             'ASSETCATALOG_COMPILER_APPICON_NAME':'AppIcon','ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME':'AccentColor','SUPPORTS_MACCATALYST':'NO','SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD':'NO'}
 
-def widget_settings(configuration):
-    return {**common(configuration),'PRODUCT_BUNDLE_IDENTIFIER':'$(FANTASYGLASS_BUNDLE_ID).widgets','INFOPLIST_FILE':'Config/Widget-Info.plist','GENERATE_INFOPLIST_FILE':'NO',
-            'CODE_SIGN_ENTITLEMENTS':'Config/Widget.entitlements','APPLICATION_EXTENSION_API_ONLY':'YES','SKIP_INSTALL':'YES',
-            'LD_RUNPATH_SEARCH_PATHS':['$(inherited)','@executable_path/Frameworks','@executable_path/../../Frameworks']}
-
 def test_settings(configuration):
     return {**common(configuration),'PRODUCT_BUNDLE_IDENTIFIER':'$(FANTASYGLASS_BUNDLE_ID).tests','GENERATE_INFOPLIST_FILE':'YES','BUNDLE_LOADER':'$(TEST_HOST)',
             'TEST_HOST':'$(BUILT_PRODUCTS_DIR)/FantasyGlass.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FantasyGlass','SKIP_INSTALL':'YES'}
 
 app_files = sorted(str(p.relative_to(ROOT)) for p in (ROOT/'App').rglob('*.swift'))
 shared_files = sorted(str(p.relative_to(ROOT)) for p in (ROOT/'Shared').rglob('*.swift'))
-widget_files = sorted(str(p.relative_to(ROOT)) for p in (ROOT/'Widget').rglob('*.swift'))
 test_files = sorted(str(p.relative_to(ROOT)) for p in (ROOT/'AppTests').rglob('*.swift'))
 package = add('CorePackage',isa='XCLocalSwiftPackageReference',relativePath='Core')
 app_core = add('app:core',isa='XCSwiftPackageProductDependency',package=package,productName='FantasyCore')
@@ -71,22 +65,16 @@ test_core = add('test:core',isa='XCSwiftPackageProductDependency',package=packag
 app_core_build = add('app:core:build',isa='PBXBuildFile',productRef=app_core)
 test_core_build = add('test:core:build',isa='PBXBuildFile',productRef=test_core)
 app_product = add('app:product',isa='PBXFileReference',explicitFileType='wrapper.application',includeInIndex=0,path='FantasyGlass.app',sourceTree='BUILT_PRODUCTS_DIR')
-widget_product = add('widget:product',isa='PBXFileReference',explicitFileType='wrapper.app-extension',includeInIndex=0,path='FantasyGlassWidgets.appex',sourceTree='BUILT_PRODUCTS_DIR')
 test_product = add('test:product',isa='PBXFileReference',explicitFileType='wrapper.cfbundle',includeInIndex=0,path='FantasyGlassTests.xctest',sourceTree='BUILT_PRODUCTS_DIR')
-embed_file = add('embed:widget',isa='PBXBuildFile',fileRef=widget_product,settings={'ATTRIBUTES':['RemoveHeadersOnCopy']})
-embed = add('embed:phase',isa='PBXCopyFilesBuildPhase',buildActionMask=2147483647,dstPath='',dstSubfolderSpec=13,files=[embed_file],name='Embed App Extensions',runOnlyForDeploymentPostprocessing=0)
 
 def dependency(name, target):
     proxy = add(name+':proxy',isa='PBXContainerItemProxy',containerPortal=uid('project'),proxyType=1,remoteGlobalIDString=uid(target),remoteInfo=target)
     return add(name+':dependency',isa='PBXTargetDependency',target=uid(target),targetProxy=proxy)
 
-add('FantasyGlassWidgets',isa='PBXNativeTarget',buildConfigurationList=configuration_list('widget',widget_settings),
-    buildPhases=[phase('widget','PBXSourcesBuildPhase',[build(p,'widget') for p in widget_files+shared_files]),phase('widget','PBXFrameworksBuildPhase',[]),phase('widget','PBXResourcesBuildPhase',[])],
-    buildRules=[],dependencies=[],name='FantasyGlassWidgets',productName='FantasyGlassWidgets',productReference=widget_product,productType='com.apple.product-type.app-extension')
 add('FantasyGlass',isa='PBXNativeTarget',buildConfigurationList=configuration_list('app',app_settings),
     buildPhases=[phase('app','PBXSourcesBuildPhase',[build(p,'app') for p in app_files+shared_files]),phase('app','PBXFrameworksBuildPhase',[app_core_build]),
-                 phase('app','PBXResourcesBuildPhase',[build('App/Assets.xcassets','app'),build('App/PrivacyInfo.xcprivacy','app')]),embed],
-    buildRules=[],dependencies=[dependency('app:widget','FantasyGlassWidgets')],name='FantasyGlass',productName='FantasyGlass',productReference=app_product,
+                 phase('app','PBXResourcesBuildPhase',[build('App/Assets.xcassets','app'),build('App/PrivacyInfo.xcprivacy','app')])],
+    buildRules=[],dependencies=[],name='FantasyGlass',productName='FantasyGlass',productReference=app_product,
     productType='com.apple.product-type.application',packageProductDependencies=[app_core])
 add('FantasyGlassTests',isa='PBXNativeTarget',buildConfigurationList=configuration_list('tests',test_settings),
     buildPhases=[phase('tests','PBXSourcesBuildPhase',[build(p,'tests') for p in test_files]),phase('tests','PBXFrameworksBuildPhase',[test_core_build]),phase('tests','PBXResourcesBuildPhase',[])],
@@ -94,16 +82,16 @@ add('FantasyGlassTests',isa='PBXNativeTarget',buildConfigurationList=configurati
     productType='com.apple.product-type.bundle.unit-test',packageProductDependencies=[test_core])
 
 groups = []
-for name, paths in [('App',app_files+['App/Assets.xcassets','App/PrivacyInfo.xcprivacy']),('Shared',shared_files),('Widget',widget_files),('AppTests',test_files),
+for name, paths in [('App',app_files+['App/Assets.xcassets','App/PrivacyInfo.xcprivacy']),('Shared',shared_files),('AppTests',test_files),
                     ('Config',sorted(str(p.relative_to(ROOT)) for p in (ROOT/'Config').iterdir() if p.is_file() and p.name != 'Signing.xcconfig'))]:
     groups.append(add('group:'+name,isa='PBXGroup',children=[file(p) for p in paths],name=name,sourceTree='<group>'))
-products = add('Products',isa='PBXGroup',children=[app_product,widget_product,test_product],name='Products',sourceTree='<group>')
+products = add('Products',isa='PBXGroup',children=[app_product,test_product],name='Products',sourceTree='<group>')
 main_group = add('main',isa='PBXGroup',children=groups+[file('Core','folder'),file('README.md'),products],sourceTree='<group>')
 add('project',isa='PBXProject',attributes={'BuildIndependentTargetsInParallel':'YES','LastSwiftUpdateCheck':'2600','LastUpgradeCheck':'2600',
-    'TargetAttributes':{uid('FantasyGlass'):{'CreatedOnToolsVersion':'26.0'},uid('FantasyGlassWidgets'):{'CreatedOnToolsVersion':'26.0'},uid('FantasyGlassTests'):{'CreatedOnToolsVersion':'26.0','TestTargetID':uid('FantasyGlass')}}},
+    'TargetAttributes':{uid('FantasyGlass'):{'CreatedOnToolsVersion':'26.0'},uid('FantasyGlassTests'):{'CreatedOnToolsVersion':'26.0','TestTargetID':uid('FantasyGlass')}}},
     buildConfigurationList=configuration_list('project',lambda c:{'CLANG_WARN_DOCUMENTATION_COMMENTS':'YES','GCC_WARN_UNUSED_VARIABLE':'YES'}),compatibilityVersion='Xcode 14.0',
     developmentRegion='en',hasScannedForEncodings=0,knownRegions=['en','Base'],mainGroup=main_group,productRefGroup=products,projectDirPath='',projectRoot='',
-    targets=[uid('FantasyGlass'),uid('FantasyGlassWidgets'),uid('FantasyGlassTests')],packageReferences=[package])
+    targets=[uid('FantasyGlass'),uid('FantasyGlassTests')],packageReferences=[package])
 
 def serialize(value, indent=0):
     pad = '\t'*indent

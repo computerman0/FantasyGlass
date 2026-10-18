@@ -32,7 +32,7 @@ if [[ "$BUILD_MODE" == "unsigned" ]]; then
   ditto "$ARCHIVE_PATH/Products/Applications/FantasyGlass.app" "$PAYLOAD_STAGE/Payload/FantasyGlass.app"
   ditto -c -k --sequesterRsrc --keepParent "$PAYLOAD_STAGE/Payload" "$BUILD_ROOT/FantasyGlass-unsigned.ipa"
   printf 'Unsigned input for a compatible re-signing tool: %s\n' "$BUILD_ROOT/FantasyGlass-unsigned.ipa"
-  printf '%s\n' 'This IPA cannot run on a normal iPhone until it is signed with compatible app and widget profiles.'
+  printf '%s\n' 'This IPA cannot run on a normal iPhone until it is signed with a compatible app profile.'
 else
   EXPORT_OPTIONS="${2:-$PROJECT_ROOT/Config/ExportOptions.local.plist}"
   if [[ ! -f "$EXPORT_OPTIONS" ]]; then

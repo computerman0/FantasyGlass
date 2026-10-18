@@ -27,7 +27,7 @@ struct SetupAssistantView: View {
                     NavigationLink { SportsSetupView(model:model) } label: { Label("Sports data setup",systemImage:"waveform.path.ecg") }
                 }
                 Section("3 · Choose background updates") {
-                    Text("Local Live Activities work without a server while the app can run. For updates and alerts while suspended, configure the optional APNs backend and a paid Apple Developer provisioning profile. iOS controls delivery and activity lifetime.")
+                    Text("The app refreshes scores while open. For notification alerts while suspended, configure the optional APNs backend and a paid Apple Developer provisioning profile. iOS controls delivery.")
                     NavigationLink { BackendSetupView(model:model) } label: { Label("APNs and backend setup",systemImage:"antenna.radiowaves.left.and.right") }
                 }
                 Section("Your credentials") {
@@ -209,10 +209,9 @@ struct BackendSetupView: View {
     var body: some View {
         Form {
             Section("Optional remote updates") {
-                Text("The on-device app is usable without a server. Reliable background score polling requires an always-running backend; APNs sends Live Activity updates and notification alerts. Apple controls final delivery and limits each activity's lifetime.")
-                Text("1. Use a paid Apple Developer account.\n2. Register app and widget bundle IDs; enable Push Notifications for the app.\n3. Create an APNs signing key and matching profiles.\n4. Deploy the included Backend with HTTPS, encryption and owner tokens.\n5. Install the Push build.\n6. Enter its URL/token, test it and enable synchronization.").font(.footnote)
+                Text("The on-device app is usable without a server. Background notification alerts require an always-running backend and APNs provisioning. Apple controls delivery.")
+                Text("1. Use a paid Apple Developer account.\n2. Register your app bundle ID and enable Push Notifications for it.\n3. Create an APNs signing key and matching profiles.\n4. Deploy the included Backend with HTTPS, encryption and owner tokens.\n5. Install the Push build.\n6. Enter its URL/token, test it and enable synchronization.").font(.footnote)
                 Link("Apple membership and capabilities",destination:URL(string:"https://developer.apple.com/support/compare-memberships/")!)
-                Link("Apple Live Activity push guide",destination:URL(string:"https://developer.apple.com/documentation/activitykit/starting-and-updating-live-activities-with-activitykit-push-notifications")!)
                 Text(AppModel.supportsPushBuild ? "This build includes the APNs entitlement; matching signing is still required." : "This build is configured for local updates. Rebuild with the Push scheme and paid provisioning to enable APNs.").font(.footnote).foregroundStyle(.orange)
             }
             Section("Your backend") {

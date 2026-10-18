@@ -14,7 +14,6 @@ struct RootView: View {
         }
         .tint(.cyan)
         .sensoryFeedback(.selection,trigger:model.selectedTab)
-        .sensoryFeedback(.success,trigger:model.activities.trackedConnection)
         .sheet(isPresented:$showSetup) { SetupAssistantView(model:model) }
         .sheet(item:$model.route) { route in
             NavigationStack { MatchupDetailView(model:model,connectionID:route.connectionID,requestedMatchupID:route.matchupID).toolbar { ToolbarItem(placement:.confirmationAction) { Button("Done") { model.route = nil } } } }
