@@ -12,8 +12,9 @@ import FantasyCore
     private(set) var tokens: [String:String] = [:]
     private(set) var started: [String:Date] = [:]
     init() { restore() }
-    var supportsActivities: Bool { ActivityAuthorizationInfo().areActivitiesEnabled }
+    var supportsActivities: Bool { !RuntimeEnvironment.isLiveContainer && ActivityAuthorizationInfo().areActivitiesEnabled }
     func restore() {
+        guard !RuntimeEnvironment.isLiveContainer else { return }
         for activity in Activity<MatchupActivityAttributes>.activities {
             guard activity.activityState == .active || activity.activityState == .stale else { continue }
             trackedConnection = activity.attributes.connectionID
@@ -21,15 +22,18 @@ import FantasyCore
         }
     }
     func token(for connectionID: String) -> String? {
+        guard !RuntimeEnvironment.isLiveContainer else { return nil }
         guard let activity = Activity<MatchupActivityAttributes>.activities.first(where: { $0.attributes.connectionID == connectionID && ($0.activityState == .active || $0.activityState == .stale) }) else { return nil }
         return tokens[activity.id] ?? activity.pushToken.map { $0.map { String(format:"%02x",$0) }.joined() }
     }
     func startedAt(for connectionID: String) -> Date? {
+        guard !RuntimeEnvironment.isLiveContainer else { return nil }
         guard let activity = Activity<MatchupActivityAttributes>.activities.first(where: { $0.attributes.connectionID == connectionID }) else { return nil }
         // Restored activities without a persisted timestamp get a conservative expiry on the backend.
         return started[activity.id] ?? UserDefaults.standard.object(forKey:"activity.start.\(activity.id)") as? Date
     }
     func start(_ league: LeagueState, games: [NFLGame], remote: Bool) async throws {
+        guard !RuntimeEnvironment.isLiveContainer else { throw ProviderError.invalidInput(RuntimeEnvironment.containerLimitations) }
         guard supportsActivities else { throw ProviderError.invalidInput("Enable Live Activities for FantasyGlass in iOS Settings. A compatible physical iPhone is required for Dynamic Island.") }
         guard let mine = league.team, let opponent = league.opponent, let matchup = league.matchup else { throw ProviderError.invalidInput("This team has no current head-to-head matchup to track.") }
         await end()
@@ -42,6 +46,7 @@ import FantasyCore
         observe(activity)
     }
     func update(_ league: LeagueState, games: [NFLGame]) async {
+        guard !RuntimeEnvironment.isLiveContainer else { return }
         for activity in Activity<MatchupActivityAttributes>.activities where activity.attributes.connectionID == league.id {
             guard league.matchup?.id == activity.attributes.matchupID else {
                 await activity.end(nil,dismissalPolicy:.immediate); continue
@@ -50,6 +55,7 @@ import FantasyCore
         }
     }
     func end() async {
+        guard !RuntimeEnvironment.isLiveContainer else { return }
         for activity in Activity<MatchupActivityAttributes>.activities {
             await activity.end(nil,dismissalPolicy:.immediate)
             tokenObservers.removeValue(forKey:activity.id)?.cancel()

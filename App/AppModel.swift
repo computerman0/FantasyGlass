@@ -41,7 +41,7 @@ private struct ESPNAccountSecret: Codable { var s2: String; var swid: String }
     static let refreshIdentifier = "com.fantasyglass.refresh"
     static var supportsPushBuild: Bool {
         #if PUSH_ENABLED
-        true
+        !RuntimeEnvironment.isLiveContainer
         #else
         false
         #endif
@@ -264,6 +264,10 @@ private struct ESPNAccountSecret: Codable { var s2: String; var swid: String }
         }
     }
     func scheduleBackgroundRefresh() {
+        guard !RuntimeEnvironment.isLiveContainer else {
+            backgroundStatus = "LiveContainer: refresh available while the app is open"
+            return
+        }
         BGTaskScheduler.shared.cancel(taskRequestWithIdentifier:Self.refreshIdentifier)
         let request = BGAppRefreshTaskRequest(identifier:Self.refreshIdentifier)
         request.earliestBeginDate = Date.now.addingTimeInterval(900)
@@ -271,6 +275,7 @@ private struct ESPNAccountSecret: Codable { var s2: String; var swid: String }
         catch { backgroundStatus = "Background refresh unavailable: \(error.localizedDescription)" }
     }
     func track(_ id: String) async {
+        guard !RuntimeEnvironment.isLiveContainer else { message = RuntimeEnvironment.containerLimitations; return }
         guard preferences.liveActivitiesEnabled else { message = "Enable Live Activities in FantasyGlass Settings first."; return }
         guard let state = leagues.first(where: { $0.id == id }) else { return }
         do {

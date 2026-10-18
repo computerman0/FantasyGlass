@@ -14,6 +14,16 @@ import SwiftData
         } catch { startupError = error.localizedDescription }
     }
     var body: some Scene {
+        if RuntimeEnvironment.isLiveContainer {
+            mainWindow
+        } else {
+            mainWindow.backgroundTask(.appRefresh(AppModel.refreshIdentifier)) {
+                let current = await MainActor.run { model }
+                if let current { _ = await current.refresh() }
+            }
+        }
+    }
+    private var mainWindow: some Scene {
         WindowGroup {
             if let model {
                 RootView(model:model)
@@ -28,10 +38,6 @@ import SwiftData
             } else {
                 ContentUnavailableView("Storage unavailable",systemImage:"externaldrive.badge.exclamationmark",description:Text(startupError ?? "Unable to open the database. Existing data has not been erased."))
             }
-        }
-        .backgroundTask(.appRefresh(AppModel.refreshIdentifier)) {
-            let current = await MainActor.run { model }
-            if let current { _ = await current.refresh() }
         }
     }
 }

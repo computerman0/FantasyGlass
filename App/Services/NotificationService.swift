@@ -5,11 +5,13 @@ import FantasyCore
 
 @MainActor final class NotificationService {
     func requestAuthorization(remote: Bool) async throws -> Bool {
+        guard !RuntimeEnvironment.isLiveContainer else { throw ProviderError.invalidInput(RuntimeEnvironment.containerLimitations) }
         let granted = try await UNUserNotificationCenter.current().requestAuthorization(options:[.alert,.sound,.badge])
         if granted && remote { UIApplication.shared.registerForRemoteNotifications() }
         return granted
     }
     func deliver(_ alerts: [FantasyAlert], connectionID: String, matchupID: String?) async throws -> Set<String> {
+        guard !RuntimeEnvironment.isLiveContainer else { return [] }
         let settings = await UNUserNotificationCenter.current().notificationSettings()
         guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return [] }
         var delivered: Set<String> = []
@@ -27,7 +29,7 @@ import FantasyCore
 
 @MainActor final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        UNUserNotificationCenter.current().delegate = self
+        if !RuntimeEnvironment.isLiveContainer { UNUserNotificationCenter.current().delegate = self }
         return true
     }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

@@ -11,4 +11,10 @@ swift test --package-path "$PROJECT_ROOT/Core"
 SIM_DESTINATION="${1:-platform=iOS Simulator,name=iPhone 17}"
 xcodebuild -project "$PROJECT_ROOT/FantasyGlass.xcodeproj" -scheme FantasyGlass -configuration Debug \
   -destination "$SIM_DESTINATION" -derivedDataPath "$PROJECT_ROOT/build/TestDerivedData" \
-  -resultBundlePath "$PROJECT_ROOT/build/Tests-$(date +%Y%m%d-%H%M%S).xcresult" CODE_SIGNING_ALLOWED=NO test
+  CODE_SIGNING_ALLOWED=NO build-for-testing
+if [[ "$SIM_DESTINATION" == *id=* ]]; then
+  python3 "$PROJECT_ROOT/Scripts/smoke-ios.py" "$SIM_DESTINATION" "$PROJECT_ROOT/build/TestDerivedData/Build/Products/Debug-iphonesimulator/FantasyGlass.app"
+fi
+xcodebuild -project "$PROJECT_ROOT/FantasyGlass.xcodeproj" -scheme FantasyGlass -configuration Debug \
+  -destination "$SIM_DESTINATION" -derivedDataPath "$PROJECT_ROOT/build/TestDerivedData" \
+  -resultBundlePath "$PROJECT_ROOT/build/Tests-$(date +%Y%m%d-%H%M%S).xcresult" CODE_SIGNING_ALLOWED=NO test-without-building

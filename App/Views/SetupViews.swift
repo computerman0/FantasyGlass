@@ -7,6 +7,9 @@ struct SetupAssistantView: View {
     var body: some View {
         NavigationStack {
             List {
+                if RuntimeEnvironment.isLiveContainer {
+                    Section("LiveContainer") { Text(RuntimeEnvironment.containerLimitations).font(.callout) }
+                }
                 Section {
                     VStack(alignment:.leading,spacing:16) {
                         Image(systemName:"football.fill").font(.system(size:48)).foregroundStyle(.cyan).padding().glassEffect()

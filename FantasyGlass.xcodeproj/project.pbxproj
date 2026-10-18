@@ -115,6 +115,7 @@
 				6CC10ACB9D7738458B0F51AC,
 				8D571BE25BAF80AEEDCDE15C,
 				852B7EE42D0ECC4D682B232C,
+				A69D55DBAEB5C8528AFC4078,
 				0D43B5B48A5FC07E7FC7E0FE,
 				200807076781004B39AF1CA9,
 				999AE31C2F1823946AF62D4A,
@@ -171,6 +172,10 @@
 			);
 			"name" = "Config";
 			"sourceTree" = "<group>";
+		};
+		1C4E2281AE07E9ED8480067D = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = A69D55DBAEB5C8528AFC4078;
 		};
 		1E86CEC13645AEED5009ED4E = {
 			"isa" = "PBXFileReference";
@@ -386,6 +391,7 @@
 				B69875D5CC346DB7F3EBAB52,
 				5534A2DA7CC9BA57FCB8EB4E,
 				185F0F72F8A0F2952E96AAD5,
+				1C4E2281AE07E9ED8480067D,
 				10311AAE2CC5C7AFE6FBE4A4,
 				7157AC766425AD3D68E91EDE,
 				1EB7515AA3A07025643F9C49,
@@ -873,6 +879,12 @@
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
 			"path" = "AppTests/PersistenceTests.swift";
+			"sourceTree" = "<group>";
+		};
+		A69D55DBAEB5C8528AFC4078 = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Services/RuntimeEnvironment.swift";
 			"sourceTree" = "<group>";
 		};
 		A6B466BAD5561615B54DA285 = {

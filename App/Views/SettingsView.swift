@@ -8,6 +8,9 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
+                if RuntimeEnvironment.isLiveContainer {
+                    Section("LiveContainer") { Text(RuntimeEnvironment.containerLimitations).font(.callout) }
+                }
                 Section("Connections") {
                     Button("Open setup assistant",systemImage:"wand.and.stars") { setup = true }
                     ForEach(model.preferences.accountAliases,id:\.self) { account in NavigationLink("ESPN · \(account)") { ESPNAccountView(model:model,initialAlias:account) } }
@@ -17,6 +20,7 @@ struct SettingsView: View {
                 }
                 Section("Live Activities") {
                     Toggle("Enable Live Activities",isOn:$model.preferences.liveActivitiesEnabled)
+                        .disabled(RuntimeEnvironment.isLiveContainer)
                         .onChange(of:model.preferences.liveActivitiesEnabled) { _,enabled in if !enabled { Task { await model.endTracking() } } }
                     Picker("Default matchup",selection:$model.preferences.defaultMatchup) {
                         Text("Choose when tracking").tag("")
