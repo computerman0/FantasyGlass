@@ -42,7 +42,8 @@ def common(configuration):
     debug = configuration.endswith('Debug')
     return {'SDKROOT':'iphoneos','SUPPORTED_PLATFORMS':'iphoneos iphonesimulator','TARGETED_DEVICE_FAMILY':'1','SWIFT_VERSION':'6.0','IPHONEOS_DEPLOYMENT_TARGET':'26.0',
             'SWIFT_OPTIMIZATION_LEVEL':'-Onone' if debug else '-O','DEBUG_INFORMATION_FORMAT':'dwarf' if debug else 'dwarf-with-dsym',
-            'ENABLE_TESTABILITY':'YES' if debug else 'NO','SWIFT_ACTIVE_COMPILATION_CONDITIONS':('DEBUG ' if debug else '')+('PUSH_ENABLED' if configuration.startswith('Push') else ''),
+            'ENABLE_TESTABILITY':'YES' if debug else 'NO','ONLY_ACTIVE_ARCH':'YES' if debug else 'NO',
+            'SWIFT_ACTIVE_COMPILATION_CONDITIONS':('DEBUG ' if debug else '')+('PUSH_ENABLED' if configuration.startswith('Push') else ''),
             'APS_ENVIRONMENT':'development' if debug else 'production','SWIFT_EMIT_LOC_STRINGS':'YES','ENABLE_PREVIEWS':'YES','PRODUCT_NAME':'$(TARGET_NAME)',
             'LD_RUNPATH_SEARCH_PATHS':['$(inherited)','@executable_path/Frameworks']}
 
