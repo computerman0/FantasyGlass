@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Check that normal and container-mode cold launches stay alive on a simulator."""
+"""Monitor actual simulator app PIDs, independent of simctl console lifetime."""
 import os
 from pathlib import Path
 import plistlib
 import re
+import shutil
 import subprocess
 import sys
+import time
 
 destination, app_path = sys.argv[1:3]
 match = re.search(r'(?:^|,)id=([^,]+)', destination)
@@ -20,32 +22,43 @@ output.mkdir(parents=True, exist_ok=True)
 def simctl(*args, **kwargs):
     return subprocess.run(['xcrun', 'simctl', *args], check=True, **kwargs)
 
+def print_diagnostics(mode, started):
+    for path in output.glob(f'{mode}*.log'):
+        print(path.read_text(), file=sys.stderr, flush=True)
+    reports = Path.home() / 'Library' / 'Logs' / 'DiagnosticReports'
+    for path in reports.glob('FantasyGlass*'):
+        if path.is_file() and path.stat().st_mtime >= started:
+            shutil.copy2(path, output / path.name)
+            print(f'Crash report saved: {path.name}', file=sys.stderr, flush=True)
+
 simctl('install', device, app_path)
 for mode in ['native', 'container']:
     environment = os.environ.copy()
     environment.pop('SIMCTL_CHILD_LC_HOME_PATH', None)
     environment.pop('SIMCTL_CHILD_LP_HOME_PATH', None)
     if mode == 'container':
-        # Exercises our fallback only. This does not reproduce LiveContainer's loader.
+        # This exercises our fallback, not LiveContainer's actual binary loader.
         environment['SIMCTL_CHILD_LC_HOME_PATH'] = '/tmp/fantasyglass-container-probe'
-    with (output / f'{mode}.log').open('w') as log:
-        process = subprocess.Popen(
-            ['xcrun', 'simctl', 'launch', '--terminate-running-process', '--console', device, bundle],
-            env=environment, stdout=log, stderr=subprocess.STDOUT)
-        try:
+    started = time.time()
+    result = simctl('launch', '--terminate-running-process',
+        '--stdout', str(output / f'{mode}.stdout.log'),
+        '--stderr', str(output / f'{mode}.stderr.log'),
+        device, bundle, env=environment, text=True, capture_output=True)
+    (output / f'{mode}.launch.log').write_text(result.stdout + result.stderr)
+    match = re.search(r':\s*(\d+)\s*$', result.stdout)
+    if not match:
+        print_diagnostics(mode, started)
+        raise RuntimeError(f'{mode}: simulator did not report an app PID')
+    pid = int(match[1])
+    try:
+        for _ in range(12):
+            time.sleep(1)
             try:
-                code = process.wait(timeout=12)
-            except subprocess.TimeoutExpired:
-                simctl('io', device, 'screenshot', str(output / f'{mode}.png'))
-                print(f'{mode}: app remained running for 12 seconds; screenshot captured.', flush=True)
-            else:
-                log.flush()
-                print((output / f'{mode}.log').read_text(), file=sys.stderr, flush=True)
-                raise RuntimeError(f'{mode}: app exited during launch (code {code}); inspect {mode}.log')
-        finally:
-            subprocess.run(['xcrun', 'simctl', 'terminate', device, bundle], check=False)
-            try:
-                process.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                process.terminate()
-                process.wait(timeout=5)
+                os.kill(pid, 0)
+            except ProcessLookupError:
+                print_diagnostics(mode, started)
+                raise RuntimeError(f'{mode}: app PID {pid} exited during launch')
+        simctl('io', device, 'screenshot', str(output / f'{mode}.png'))
+        print(f'{mode}: app PID {pid} remained alive for 12 seconds; screenshot captured.', flush=True)
+    finally:
+        subprocess.run(['xcrun', 'simctl', 'terminate', device, bundle], check=False)

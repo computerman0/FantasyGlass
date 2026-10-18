@@ -8,6 +8,7 @@ import SwiftData
     private let startupError: String?
     init() {
         do {
+            _ = try FileManager.default.url(for:.applicationSupportDirectory,in:.userDomainMask,appropriateFor:nil,create:true)
             let container = try ModelContainer(for:CachedLeague.self,CachedObject.self)
             let appModel = AppModel(container:container)
             _model = State(initialValue:appModel)
