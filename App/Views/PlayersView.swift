@@ -52,40 +52,10 @@ struct PlayersView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section {
-                    Picker("Show",selection:$filter) { ForEach(PlayerFilter.allCases) { Text($0.rawValue).tag($0) } }
-                    Picker("League",selection:$leagueID) {
-                        Text("Every league").tag("")
-                        ForEach(model.leagues) { Text("\($0.snapshot.name) · \($0.team?.name ?? "")").tag($0.id) }
-                    }
-                    Picker("NFL game",selection:$gameID) {
-                        Text("Every game").tag("")
-                        ForEach(model.allGames) { Text("\($0.away) @ \($0.home) · \($0.start.formatted(date:.abbreviated,time:.omitted))").tag($0.id) }
-                    }
-                }
+                filters
                 Section {
                     ForEach(groups,id:\.first!.player.id) { holdings in
-                        if let first = holdings.first {
-                            DisclosureGroup {
-                                NavigationLink("Player details and scoring",systemImage:"chart.bar.xaxis") { PlayerDetailView(model:model,playerID:first.player.id) }
-                                ForEach(holdings) { holding in
-                                    VStack(alignment:.leading,spacing:4) {
-                                        Text("\(holding.league.snapshot.name) · \(holding.player.starter ? "Starter" : "Bench")").font(.subheadline)
-                                        HStack {
-                                            Text(holding.league.rules.name).font(.caption).foregroundStyle(.secondary)
-                                            Spacer()
-                                            ScoreText(value:holding.score?.issues.isEmpty == true ? holding.score?.total : nil)
-                                        }
-                                    }
-                                }
-                            } label: {
-                                VStack(alignment:.leading,spacing:4) {
-                                    PlayerRow(holding:first,model:model)
-                                    Text("\(holdings.count) team\(holdings.count == 1 ? "" : "s") · highest local score \(holdings.compactMap { $0.score?.issues.isEmpty == true ? $0.score?.total : nil }.max()?.exact ?? "—")")
-                                        .font(.caption).foregroundStyle(.secondary)
-                                }
-                            }
-                        }
+                        PlayerGroupRow(holdings:holdings,model:model)
                     }
                     if groups.isEmpty { ContentUnavailableView.search(text:search.isEmpty ? "these filters" : search) }
                 } footer: { Text("A player appears once. Expand to compare exact points in each league. Points sorting uses the highest local league score; missing scores sort last.") }
@@ -93,6 +63,63 @@ struct PlayersView: View {
             .navigationTitle("Players").searchable(text:$search,prompt:"Find a player")
             .toolbar { ToolbarItem(placement:.topBarTrailing) { Menu("Sort",systemImage:"arrow.up.arrow.down") { Picker("Sort",selection:$sort) { ForEach(PlayerSort.allCases) { Text($0.rawValue).tag($0) } } } } }
             .refreshable { await model.refresh() }
+        }
+    }
+    private var filters: some View {
+        Section {
+            Picker("Show",selection:$filter) { ForEach(PlayerFilter.allCases) { Text($0.rawValue).tag($0) } }
+            Picker("League",selection:$leagueID) {
+                Text("Every league").tag("")
+                ForEach(model.leagues) { league in
+                    Text("\(league.snapshot.name) · \(league.team?.name ?? "")").tag(league.id)
+                }
+            }
+            Picker("NFL game",selection:$gameID) {
+                Text("Every game").tag("")
+                ForEach(model.allGames) { game in
+                    Text("\(game.away) @ \(game.home) · \(game.start.formatted(date:.abbreviated,time:.omitted))").tag(game.id)
+                }
+            }
+        }
+    }
+}
+
+private struct PlayerGroupRow: View {
+    let holdings: [PlayerHolding]
+    let model: AppModel
+    private var summary: String {
+        let scores: [Decimal] = holdings.compactMap { holding in
+            guard let score = holding.score, score.issues.isEmpty else { return nil }
+            return score.total
+        }
+        let highest = scores.max()?.exact ?? "—"
+        let suffix = holdings.count == 1 ? "" : "s"
+        return "\(holdings.count) team\(suffix) · highest local score \(highest)"
+    }
+    var body: some View {
+        if let first = holdings.first {
+            DisclosureGroup {
+                NavigationLink {
+                    PlayerDetailView(model:model,playerID:first.player.id)
+                } label: {
+                    Label("Player details and scoring",systemImage:"chart.bar.xaxis")
+                }
+                ForEach(holdings) { holding in
+                    VStack(alignment:.leading,spacing:4) {
+                        Text("\(holding.league.snapshot.name) · \(holding.player.starter ? "Starter" : "Bench")").font(.subheadline)
+                        HStack {
+                            Text(holding.league.rules.name).font(.caption).foregroundStyle(.secondary)
+                            Spacer()
+                            ScoreText(value:holding.score?.issues.isEmpty == true ? holding.score?.total : nil)
+                        }
+                    }
+                }
+            } label: {
+                VStack(alignment:.leading,spacing:4) {
+                    PlayerRow(holding:first,model:model)
+                    Text(summary).font(.caption).foregroundStyle(.secondary)
+                }
+            }
         }
     }
 }
