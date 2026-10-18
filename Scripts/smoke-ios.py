@@ -20,7 +20,14 @@ output = Path(__file__).resolve().parent.parent / 'build' / 'launch-checks'
 output.mkdir(parents=True, exist_ok=True)
 
 def simctl(*args, **kwargs):
-    return subprocess.run(['xcrun', 'simctl', *args], check=True, **kwargs)
+    try:
+        return subprocess.run(['xcrun', 'simctl', *args], check=True, **kwargs)
+    except subprocess.CalledProcessError as error:
+        if error.stdout:
+            print(error.stdout, file=sys.stderr, flush=True)
+        if error.stderr:
+            print(error.stderr, file=sys.stderr, flush=True)
+        raise
 
 def print_diagnostics(mode, started):
     for path in output.glob(f'{mode}*.log'):
@@ -40,10 +47,16 @@ for mode in ['native', 'container']:
         # This exercises our fallback, not LiveContainer's actual binary loader.
         environment['SIMCTL_CHILD_LC_HOME_PATH'] = '/tmp/fantasyglass-container-probe'
     started = time.time()
-    result = simctl('launch', '--terminate-running-process',
-        '--stdout', str(output / f'{mode}.stdout.log'),
-        '--stderr', str(output / f'{mode}.stderr.log'),
-        device, bundle, env=environment, text=True, capture_output=True)
+    try:
+        result = simctl('launch', '--terminate-running-process',
+            f'--stdout={output / f"{mode}.stdout.log"}',
+            f'--stderr={output / f"{mode}.stderr.log"}',
+            device, bundle, env=environment, text=True, capture_output=True)
+    except subprocess.CalledProcessError as error:
+        (output / f'{mode}.launch.log').write_text((error.stdout or '') + (error.stderr or ''))
+        print_diagnostics(mode, started)
+        subprocess.run(['xcrun', 'simctl', 'help', 'launch'], check=False)
+        raise
     (output / f'{mode}.launch.log').write_text(result.stdout + result.stderr)
     match = re.search(r':\s*(\d+)\s*$', result.stdout)
     if not match:
