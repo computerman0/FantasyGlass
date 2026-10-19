@@ -1,0 +1,436 @@
+{
+  "events": [
+    {
+      "id": "401772634",
+      "date": "2025-10-12T13:30Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "NYJ"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "DEN"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "401772856",
+      "date": "2025-10-12T17:00Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "IND"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "ARI"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "401772750",
+      "date": "2025-10-12T17:00Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "MIA"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "LAC"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "401772751",
+      "date": "2025-10-12T17:00Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "NO"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "NE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "401772748",
+      "date": "2025-10-12T17:00Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "PIT"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "CLE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "401772858",
+      "date": "2025-10-12T17:00Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "CAR"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "DAL"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "401772857",
+      "date": "2025-10-12T17:00Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "JAX"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "SEA"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "401772855",
+      "date": "2025-10-12T17:00Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "BAL"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "LAR"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "401772859",
+      "date": "2025-10-12T20:05Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "LV"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "TEN"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "401772752",
+      "date": "2025-10-12T20:25Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "GB"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "CIN"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "401772749",
+      "date": "2025-10-12T20:25Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "TB"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "SF"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "401772923",
+      "date": "2025-10-13T00:20Z",
+      "status": {
+        "clock": 0.0,
+        "displayClock": "0:00",
+        "period": 4,
+        "type": {
+          "id": "3",
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "description": "Final",
+          "detail": "Final",
+          "shortDetail": "Final"
+        }
+      },
+      "competitions": [
+        {
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "KC"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "DET"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

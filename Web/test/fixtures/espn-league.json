@@ -1,0 +1,169 @@
+{
+  "id": 123,
+  "seasonId": 2026,
+  "scoringPeriodId": 7,
+  "status": {
+    "currentMatchupPeriod": 7
+  },
+  "settings": {
+    "name": "Fixture League (not live)",
+    "scoringSettings": {
+      "scoringType": "H2H_POINTS",
+      "scoringItems": [
+        {
+          "statId": 3,
+          "points": 0.04
+        },
+        {
+          "statId": 4,
+          "points": 4
+        },
+        {
+          "statId": 24,
+          "points": 0.1
+        },
+        {
+          "statId": 53,
+          "points": 1
+        },
+        {
+          "statId": 95,
+          "points": 0,
+          "pointsOverrides": {
+            "16": 2
+          }
+        }
+      ]
+    },
+    "scheduleSettings": {
+      "matchupPeriods": {
+        "7": [
+          7
+        ]
+      }
+    }
+  },
+  "teams": [
+    {
+      "id": 1,
+      "name": "Glass Cannons",
+      "owners": [
+        "owner"
+      ],
+      "record": {
+        "overall": {
+          "wins": 4,
+          "losses": 2,
+          "ties": 0
+        }
+      },
+      "roster": {
+        "entries": [
+          {
+            "lineupSlotId": 0,
+            "playerPoolEntry": {
+              "player": {
+                "id": 3918298,
+                "fullName": "Josh Allen",
+                "defaultPositionId": 1,
+                "proTeamId": 2,
+                "injuryStatus": "ACTIVE",
+                "jersey": "17",
+                "stats": [
+                  {
+                    "seasonId": 2026,
+                    "statSplitTypeId": 1,
+                    "scoringPeriodId": 7,
+                    "statSourceId": 0,
+                    "stats": {
+                      "3": 275,
+                      "4": 3,
+                      "24": 45
+                    },
+                    "appliedTotal": 27.5
+                  },
+                  {
+                    "seasonId": 2026,
+                    "statSplitTypeId": 1,
+                    "scoringPeriodId": 7,
+                    "statSourceId": 1,
+                    "stats": {
+                      "3": 300,
+                      "4": 2,
+                      "24": 40
+                    },
+                    "appliedTotal": 24
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "name": "Sunday Club",
+      "roster": {
+        "entries": [
+          {
+            "lineupSlotId": 0,
+            "playerPoolEntry": {
+              "player": {
+                "id": 3139477,
+                "fullName": "Patrick Mahomes",
+                "defaultPositionId": 1,
+                "proTeamId": 12,
+                "injuryStatus": "ACTIVE",
+                "jersey": "17",
+                "stats": [
+                  {
+                    "seasonId": 2026,
+                    "statSplitTypeId": 1,
+                    "scoringPeriodId": 7,
+                    "statSourceId": 0,
+                    "stats": {
+                      "3": 200,
+                      "4": 2,
+                      "24": 0
+                    },
+                    "appliedTotal": 16
+                  },
+                  {
+                    "seasonId": 2026,
+                    "statSplitTypeId": 1,
+                    "scoringPeriodId": 7,
+                    "statSourceId": 1,
+                    "stats": {
+                      "3": 300,
+                      "4": 2,
+                      "24": 40
+                    },
+                    "appliedTotal": 24
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "schedule": [
+    {
+      "id": 7,
+      "matchupPeriodId": 7,
+      "home": {
+        "teamId": 1,
+        "totalPoints": 27.5,
+        "adjustment": 0
+      },
+      "away": {
+        "teamId": 2,
+        "totalPoints": 16,
+        "adjustment": 0
+      },
+      "winner": "UNDECIDED"
+    }
+  ]
+}

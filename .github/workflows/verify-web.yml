@@ -1,0 +1,48 @@
+name: Verify website
+on:
+  push:
+    paths:
+      - 'Web/**'
+      - '.github/workflows/verify-web.yml'
+  pull_request:
+    paths:
+      - 'Web/**'
+      - '.github/workflows/verify-web.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    defaults:
+      run:
+        working-directory: Web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: Web/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build && npm run typecheck && npm test
+      - run: npx playwright install --with-deps chromium
+      - name: Exercise desktop and mobile browser flows
+        run: |
+          npm run dev > /tmp/fantasyglass-web-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:5173/ >/dev/null; then break; fi
+            sleep 1
+          done
+          npx playwright test test/browser.spec.mjs --workers=1 --reporter=line
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: FantasyGlass-web-checks
+          path: |
+            Web/test-results
+            /tmp/fantasyglass-web-preview.log
+          retention-days: 7

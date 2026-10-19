@@ -28,7 +28,7 @@ Set:
 | `PORT` | `8080` by default |
 | `APNS_TEAM_ID`, `APNS_KEY_ID` | Identifiers from your Apple account |
 | `APNS_KEY_FILE` | Absolute path to your private APNs `.p8` file |
-| `APNS_BUNDLE_ID` | Exact installed **app** identifier, without `.widgets` |
+| `APNS_BUNDLE_ID` | Exact installed **app** identifier |
 | `APNS_ENVIRONMENT` | `sandbox` for development profiles, `production` for distribution |
 
 Start locally:
@@ -59,9 +59,9 @@ Subscription payloads, ESPN cookies, optional SportsDataIO keys, frames and deli
 
 The worker uses the same ESPN views and stat identifiers as the Swift adapter. A shared fixture contract checks decimal scoring in both implementations. JavaScript numeric coercion is avoided for provider score/stat tokens. SportsDataIO can replace only explicitly mapped, fully covered player lines; a feed failure retains ESPN and records a status note. The server never writes ESPN settings.
 
-Polling defaults to 60 seconds with active NFL games, 120 seconds near kickoff, 15 minutes idle, and one hour for old finished weeks. Identical reads are cached briefly, keyed by credential identity. HTTP 429 respects Retry-After. Provider failures keep the last frame and let the activity's stale date expire; they never generate a fresh-looking zero score. NFL game-status failures also prevent publishing an unsupported “live” update.
+Polling defaults to 60 seconds with active NFL games, 120 seconds near kickoff, 15 minutes idle, and one hour for old finished weeks. Identical reads are cached briefly, keyed by credential identity. HTTP 429 respects Retry-After. Provider failures keep the last frame and record the provider failure; they never generate a fresh-looking zero score. NFL game-status failures also prevent unsupported notification transitions.
 
-APNs uses ES256 JWTs, the correct app topic (plus `.push-type.liveactivity` for activity tokens), priority 5 for routine activity updates, stale dates, payload limits and token invalidation. Device alert pushes use a separate token/topic and priority 10. The service ends activities near eight hours, at a matchup change or when all games finish; it cannot perpetually restart them while the app is suspended. Re-pin in the foreground.
+APNs uses ES256 JWTs, the exact app topic, priority 10 for alert pushes, a 4 KB payload limit and token invalidation. Version 1.0.1 removes all Live Activity update/end payloads and activity-token storage. The worker sends ordinary notification alerts only.
 
 Alert transitions are detected on the server. Persistent event IDs and an encrypted outbox survive restarts; failed sends back off. APNs collapse IDs reduce duplicates. Delivery after an ambiguous network failure is at-least-once, not an exactly-once guarantee. Old alert pushes expire, and subscription data expires after 30 days without app synchronization. Disable remote mode before changing backend addresses so the old server can delete its subscriptions.
 
@@ -73,10 +73,9 @@ On your physical device:
 
 1. Install a correctly signed Push build and choose matching sandbox/production on the server.
 2. Enable remote mode; Test Connection must report APNs configured.
-3. Pin a current matchup. Confirm the server receives an activity token by observing its subscription status without logging the token.
-4. Lock/background the phone during an active game and verify the activity's timestamp/score advances from actual provider changes.
-5. End tracking and verify the activity subscription token is cleared. Re-pin and confirm rotation is handled.
-6. Exercise an enabled notification transition with controlled fixtures on a separate test server; then verify genuine game-day transitions. Never label synthetic fixture pushes as live football.
-7. Stop the server/network and verify the activity becomes delayed rather than remaining apparently live.
+3. Grant notification permission and confirm that device-token registration succeeds.
+4. Exercise an enabled notification transition with controlled fixtures on a separate test server; then verify genuine game-day transitions. Never label synthetic fixture pushes as live football.
+5. Reinstall/re-register and confirm token rotation removes queued alerts for the previous token.
+6. Stop the server/network and confirm its status records a failure without inventing score changes.
 
 Keep APNs keys out of the repository, do not enable request-body/header logging at the reverse proxy, and restrict operator access. Provider licenses and Apple policies still govern use.

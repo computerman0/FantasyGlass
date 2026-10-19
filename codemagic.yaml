@@ -9,7 +9,7 @@ workflows:
     scripts:
       - name: Test portable core
         script: swift test --package-path Core
-      - name: Archive native app and widget
+      - name: Archive native app
         script: |
           set -euo pipefail
           mkdir -p build
@@ -30,7 +30,6 @@ workflows:
       ios_signing:
         distribution_type: app_store
         # Replace BOTH bundle identifiers below with your registered app ID.
-        # Matching .widgets provisioning must also exist in Code signing identities.
         bundle_identifier: com.yourname.FantasyGlass
       vars:
         BUNDLE_ID: com.yourname.FantasyGlass
@@ -57,7 +56,7 @@ workflows:
           python3 Scripts/generate-project.py
       - name: Test portable core
         script: swift test --package-path Core
-      - name: Apply app and widget signing profiles
+      - name: Apply app signing profile
         script: |
           xcode-project use-profiles --custom-export-options='{"testFlightInternalTestingOnly": true}'
       - name: Build the signed IPA

@@ -1,0 +1,20 @@
+FantasyGlass 1.0.1 (build 3) native archive validation
+Recorded: 2026-10-18
+Run: https://github.com/computerman0/FantasyGlass/actions/runs/39153832071
+Source: 51f3e2650f41d9333a6038a067b2934ff8c3bdf0
+Mode: unsigned Release device archive, no widget or ActivityKit code
+iPhoneOS SDK: 26.2
+
+Selected actual workflow output:
+unsigned-ipa	Select installed stable Xcode 26 or newer	2026-10-18T18:22:17.3832920Z Xcode 26.3
+unsigned-ipa	Select installed stable Xcode 26 or newer	2026-10-18T18:22:17.3835970Z Build version 17C529
+unsigned-ipa	Test the portable scoring and provider core	2026-10-18T18:22:40.7920950Z ✔ Test run with 19 tests in 0 suites passed after 0.538 seconds.
+unsigned-ipa	Archive app without signing	2026-10-18T18:23:38.5163430Z ** ARCHIVE SUCCEEDED **
+unsigned-ipa	Archive app without signing	2026-10-18T18:23:38.6517460Z Unsigned input for a compatible re-signing tool: /Users/runner/work/FantasyGlass/FantasyGlass/build/unsigned/FantasyGlass-unsigned.ipa
+
+IPA artifact: 12145749624 / FantasyGlass-unsigned-IPA
+Artifact ZIP size: 714084 bytes
+Artifact ZIP SHA-256: 62596e4894d35c2a25903a7008a24ae47b287dfee45bf4c081387f72fbe9364d
+Artifact expiry: 2026-10-25T18:23:39Z
+The digest is for the uploaded GitHub artifact ZIP, not its contained IPA.
+Physical iPhone / LiveContainer launch has not been verified.

@@ -1,0 +1,25 @@
+import {test,expect} from '@playwright/test';
+test('real historical public league imports and survives reload and offline navigation',async({page,context})=>{
+ test.setTimeout(90000);
+ await page.goto('http://127.0.0.1:5173/');
+ await page.getByRole('button',{name:'Connect your first league'}).click();
+ await page.getByRole('button',{name:'Use a historical public league to test'}).click();
+ await page.getByRole('button',{name:'Test connection',exact:true}).click();
+ await expect(page.getByText('Connection verified',{exact:false})).toBeVisible({timeout:40000});
+ await page.locator('.team-choice input').first().check();
+ await page.getByRole('button',{name:'Add 1 team',exact:true}).click();
+ await expect(page.locator('.matchup-card')).toHaveCount(1,{timeout:40000});
+ await page.reload();await expect(page.locator('.matchup-card')).toHaveCount(1);
+ await expect(page.getByText('Sample mode',{exact:false})).toHaveCount(0);
+ await page.screenshot({path:'test-results/historical-import.png',fullPage:true});
+ await page.evaluate(()=>navigator.serviceWorker.ready);
+ await context.setOffline(true);await page.reload();
+ await expect(page.locator('.matchup-card')).toHaveCount(1);
+ await expect(page.getByText('You’re offline.',{exact:false})).toBeVisible();
+ await context.setOffline(false);await page.reload();
+ await expect(page.locator('.matchup-card')).toHaveCount(1);
+ await page.locator('.sidebar').getByRole('button',{name:'Leagues'}).click();
+ await page.getByRole('button',{name:'Remove league',exact:true}).click();
+ await page.locator('dialog').getByRole('button',{name:'Remove league',exact:true}).click();
+ await expect(page.locator('.league-card')).toHaveCount(0);
+});

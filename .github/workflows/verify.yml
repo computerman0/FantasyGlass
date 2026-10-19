@@ -1,7 +1,6 @@
-name: Verify
+name: Verify native iOS (manual)
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
 jobs:
   portable-core:
     runs-on: ubuntu-22.04

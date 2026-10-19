@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env*
+!.env.example
+.sites-runtime/
+.wrangler/
+.local/
+*.tar.gz
+*.sqlite*
+playwright-report/
+test-results/
